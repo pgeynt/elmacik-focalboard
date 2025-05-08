@@ -1,0 +1,39 @@
+# docker/docker-compose.dev.yml
+services:
+  webapp:
+    image: node:16.3.0
+    working_dir: /webapp
+    volumes:
+      - ../webapp:/webapp             # ← doğru yol
+      - ../webapp/node_modules:/webapp/node_modules
+      - ../config/config.json:/webapp/config.json
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+    command: npm run serve            # şimdi gerçek bir dev-server start eder
+    networks:
+      - proxy
+    depends_on:
+      - focalboard-db
+
+  focalboard-db:
+    image: postgres:latest
+    container_name: focalboard-postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: boards
+      POSTGRES_USER: boardsuser
+      POSTGRES_PASSWORD: boardsuser-password
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - proxy
+
+volumes:
+  pgdata:
+
+networks:
+  proxy:

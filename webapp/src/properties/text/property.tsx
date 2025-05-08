@@ -10,7 +10,7 @@ export default class TextProperty extends PropertyType {
     Editor = Text
     name = 'Text'
     type = 'text' as PropertyTypeEnum
-    displayName = (intl: IntlShape) => intl.formatMessage({id: 'PropertyType.Text', defaultMessage: 'Text'})
+    displayName = (intl: IntlShape) => intl.formatMessage({id: 'PropertyType.Text', defaultMessage: 'Metin'})
     canFilter = true
     filterValueType = 'text' as FilterValueType
 }

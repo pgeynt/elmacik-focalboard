@@ -12,7 +12,7 @@ const DividerElement = (): JSX.Element => <div className='DividerElement'/>
 
 contentRegistry.registerContentType({
     type: 'divider',
-    getDisplayText: (intl) => intl.formatMessage({id: 'ContentBlock.divider', defaultMessage: 'divider'}),
+    getDisplayText: (intl) => intl.formatMessage({id: 'ContentBlock.divider', defaultMessage: 'ayırıcı'}),
     getIcon: () => <DividerIcon/>,
     createBlock: async (): Promise<DividerBlock> => {
         return createDividerBlock()

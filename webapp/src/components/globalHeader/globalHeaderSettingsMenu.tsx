@@ -47,12 +47,12 @@ const GlobalHeaderSettingsMenu = (props: Props) => {
                 <Menu position='left'>
                     <Menu.SubMenu
                         id='import'
-                        name={intl.formatMessage({id: 'Sidebar.import', defaultMessage: 'Import'})}
+                        name={intl.formatMessage({id: 'Sidebar.import', defaultMessage: 'İçe Aktar'})}
                         position='left-bottom'
                     >
                         <Menu.Text
                             id='import_archive'
-                            name={intl.formatMessage({id: 'Sidebar.import-archive', defaultMessage: 'Import archive'})}
+                            name={intl.formatMessage({id: 'Sidebar.import-archive', defaultMessage: 'Arşivi içe aktar'})}
                             onClick={async () => {
                                 TelemetryClient.trackEvent(TelemetryCategory, TelemetryActions.ImportArchive)
                                 Archiver.importFullArchive()
@@ -74,7 +74,7 @@ const GlobalHeaderSettingsMenu = (props: Props) => {
                     </Menu.SubMenu>
                     <Menu.SubMenu
                         id='lang'
-                        name={intl.formatMessage({id: 'Sidebar.set-language', defaultMessage: 'Set language'})}
+                        name={intl.formatMessage({id: 'Sidebar.set-language', defaultMessage: 'Dil ayarla'})}
                         position='left-bottom'
                     >
                         {
@@ -91,7 +91,7 @@ const GlobalHeaderSettingsMenu = (props: Props) => {
                     </Menu.SubMenu>
                     <Menu.Switch
                         id='random-icons'
-                        name={intl.formatMessage({id: 'Sidebar.random-icons', defaultMessage: 'Random icons'})}
+                        name={intl.formatMessage({id: 'Sidebar.random-icons', defaultMessage: 'Rastgele ikonlar'})}
                         isOn={randomIcons}
                         onClick={async () => toggleRandomIcons()}
                         suppressItemClicked={true}
@@ -100,7 +100,7 @@ const GlobalHeaderSettingsMenu = (props: Props) => {
                         <Menu.Text
                             id='product-tour'
                             className='product-tour'
-                            name={intl.formatMessage({id: 'Sidebar.product-tour', defaultMessage: 'Product tour'})}
+                            name={intl.formatMessage({id: 'Sidebar.product-tour', defaultMessage: 'Ürün turu'})}
                             onClick={async () => {
                                 TelemetryClient.trackEvent(TelemetryCategory, TelemetryActions.StartTour)
 

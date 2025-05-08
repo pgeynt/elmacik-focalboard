@@ -14,13 +14,13 @@ const GuestNoBoards = () => {
                 <div className='title'>
                     <FormattedMessage
                         id='guest-no-board.title'
-                        defaultMessage={'No boards yet'}
+                        defaultMessage={'Henüz pano yok'}
                     />
                 </div>
                 <div className='subtitle'>
                     <FormattedMessage
                         id='guest-no-board.subtitle'
-                        defaultMessage={'You don\'t have access to any board in this team yet, please wait until somebody adds you to any board.'}
+                        defaultMessage={'Bu takımda henüz herhangi bir panoya erişiminiz yok, lütfen birisi sizi herhangi bir panoya ekleyene kadar bekleyin.'}
                     />
                 </div>
                 <ErrorIllustration/>

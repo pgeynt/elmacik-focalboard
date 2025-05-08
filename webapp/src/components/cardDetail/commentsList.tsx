@@ -62,7 +62,7 @@ const CommentsList = (props: Props) => {
             <MarkdownEditor
                 className='newcomment'
                 text={newComment}
-                placeholderText={intl.formatMessage({id: 'CardDetail.new-comment-placeholder', defaultMessage: 'Add a comment...'})}
+                placeholderText={intl.formatMessage({id: 'CardDetail.new-comment-placeholder', defaultMessage: 'Yorum ekle...'})}
                 onChange={(value: string) => {
                     if (newComment !== value) {
                         setNewComment(value)
@@ -77,7 +77,7 @@ const CommentsList = (props: Props) => {
             >
                 <FormattedMessage
                     id='CommentsList.send'
-                    defaultMessage='Send'
+                    defaultMessage='Gönder'
                 />
             </Button>
             }

@@ -10,7 +10,7 @@ export default class EmailProperty extends PropertyType {
     Editor = Email
     name = 'Email'
     type = 'email' as PropertyTypeEnum
-    displayName = (intl: IntlShape) => intl.formatMessage({id: 'PropertyType.Email', defaultMessage: 'Email'})
+    displayName = (intl: IntlShape) => intl.formatMessage({id: 'PropertyType.Email', defaultMessage: 'E-posta'})
     canFilter = true
     filterValueType = 'text' as FilterValueType
 }

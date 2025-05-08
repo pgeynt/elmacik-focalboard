@@ -26,7 +26,7 @@ const AttachmentList = (props: Props): JSX.Element => {
     return (
         <div className='Attachment'>
             <div className='attachment-header'>
-                <div className='attachment-title mb-2'>{intl.formatMessage({id: 'Attachment.Attachment-title', defaultMessage: 'Attachment'})} {`(${attachments.length})`}</div>
+                <div className='attachment-title mb-2'>{intl.formatMessage({id: 'Attachment.Attachment-title', defaultMessage: 'Ekler'})} {`(${attachments.length})`}</div>
                 <BoardPermissionGate permissions={[Permission.ManageBoardCards]}>
                     <div
                         className='attachment-plus-btn'

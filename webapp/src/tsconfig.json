@@ -1,8 +1,9 @@
 {
     "extends": "../tsconfig.json",
     "compilerOptions": {
-		"baseUrl": ".",
-		"paths": {
+        "baseUrl": ".",
+        "types": ["nanoevents", "node"],
+        "paths": {
 			"*": [
 				"../node_modules/*",
 				"../@custom_types/*"

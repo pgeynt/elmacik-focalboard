@@ -50,7 +50,7 @@ const ViewMenu = (props: Props) => {
         TelemetryClient.trackEvent(TelemetryCategory, TelemetryActions.DuplicateBoardView, {board: board.id, view: activeView.id})
         const currentViewId = activeView.id
         const newView = createBoardView(activeView)
-        newView.title = `${activeView.title} copy`
+        newView.title = `${activeView.title} kopya`
         newView.id = Utils.createGuid(IDType.View)
         mutator.insertBlock(
             newView.boardId,
@@ -96,7 +96,7 @@ const ViewMenu = (props: Props) => {
 
         TelemetryClient.trackEvent(TelemetryCategory, TelemetryActions.CreateBoardView, {board: board.id, view: activeView.id})
         const view = createBoardView()
-        view.title = intl.formatMessage({id: 'View.NewBoardTitle', defaultMessage: 'Board view'})
+        view.title = intl.formatMessage({id: 'View.NewBoardTitle', defaultMessage: 'Pano görünümü'})
         view.fields.viewType = 'board'
         view.boardId = board.id
 
@@ -123,7 +123,7 @@ const ViewMenu = (props: Props) => {
         Utils.log('addview-table')
 
         const view = createBoardView()
-        view.title = intl.formatMessage({id: 'View.NewTableTitle', defaultMessage: 'Table view'})
+        view.title = intl.formatMessage({id: 'View.NewTableTitle', defaultMessage: 'Tablo görünümü'})
         view.fields.viewType = 'table'
         view.boardId = board.id
         view.fields.visiblePropertyIds = board.cardProperties.map((o: IPropertyTemplate) => o.id)
@@ -154,7 +154,7 @@ const ViewMenu = (props: Props) => {
         Utils.log('addview-gallery')
 
         const view = createBoardView()
-        view.title = intl.formatMessage({id: 'View.NewGalleryTitle', defaultMessage: 'Gallery view'})
+        view.title = intl.formatMessage({id: 'View.NewGalleryTitle', defaultMessage: 'Galeri görünümü'})
         view.fields.viewType = 'gallery'
         view.boardId = board.id
         view.fields.visiblePropertyIds = [Constants.titleColumnId]
@@ -183,7 +183,7 @@ const ViewMenu = (props: Props) => {
         Utils.log('addview-calendar')
 
         const view = createBoardView()
-        view.title = intl.formatMessage({id: 'View.NewCalendarTitle', defaultMessage: 'Calendar view'})
+        view.title = intl.formatMessage({id: 'View.NewCalendarTitle', defaultMessage: 'Takvim görünümü'})
         view.fields.viewType = 'calendar'
         view.parentId = board.id
         view.boardId = board.id
@@ -214,27 +214,27 @@ const ViewMenu = (props: Props) => {
 
     const duplicateViewText = intl.formatMessage({
         id: 'View.DuplicateView',
-        defaultMessage: 'Duplicate view',
+        defaultMessage: 'Görünümü çoğalt',
     })
     const deleteViewText = intl.formatMessage({
         id: 'View.DeleteView',
-        defaultMessage: 'Delete view',
+        defaultMessage: 'Görünümü sil',
     })
     const addViewText = intl.formatMessage({
         id: 'View.AddView',
-        defaultMessage: 'Add view',
+        defaultMessage: 'Görünüm ekle',
     })
     const boardText = intl.formatMessage({
         id: 'View.Board',
-        defaultMessage: 'Board',
+        defaultMessage: 'Pano',
     })
     const tableText = intl.formatMessage({
         id: 'View.Table',
-        defaultMessage: 'Table',
+        defaultMessage: 'Tablo',
     })
     const galleryText = intl.formatMessage({
         id: 'View.Gallery',
-        defaultMessage: 'Gallery',
+        defaultMessage: 'Galeri',
     })
 
     const iconForViewType = (viewType: IViewType) => {
@@ -311,7 +311,7 @@ const ViewMenu = (props: Props) => {
                             />
                             <Menu.Text
                                 id='calendar'
-                                name='Calendar'
+                                name='Takvim'
                                 icon={<CalendarIcon/>}
                                 onClick={handleAddViewCalendar}
                             />

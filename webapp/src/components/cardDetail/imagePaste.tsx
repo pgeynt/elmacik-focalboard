@@ -43,7 +43,7 @@ export default function useImagePaste(boardId: string, cardId: string, contentOr
         }
 
         if (someFilesNotUploaded) {
-            sendFlashMessage({content: intl.formatMessage({id: 'imagePaste.upload-failed', defaultMessage: 'Some files not uploaded. File size limit reached'}), severity: 'normal'})
+            sendFlashMessage({content: intl.formatMessage({id: 'imagePaste.upload-failed', defaultMessage: 'Bazı dosyalar yüklenemedi. Dosya boyutu sınırına ulaşıldı'}), severity: 'normal'})
         }
 
         const afterRedo = async (newBlocks: Block[]) => {

@@ -413,7 +413,7 @@ const Sidebar = (props: Props) => {
             >
                 <FormattedMessage
                     id='Sidebar.add-board'
-                    defaultMessage='+ Add board'
+                    defaultMessage='+ Pano ekle'
                 />
             </div>
 

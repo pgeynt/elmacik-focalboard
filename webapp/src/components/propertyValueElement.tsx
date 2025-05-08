@@ -10,9 +10,9 @@ import propsRegistry from '../properties'
 
 type Props = {
     board: Board
-    readOnly: boolean
     card: Card
     propertyTemplate: IPropertyTemplate
+    readOnly: boolean
     showEmptyPlaceholder: boolean
 }
 

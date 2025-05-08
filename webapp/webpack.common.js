@@ -7,6 +7,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const outpath = path.resolve(__dirname, 'pack');
+const isDev = process.env.NODE_ENV === 'development';
 
 function makeCommonConfig() {
     const commonConfig = {
@@ -96,7 +97,7 @@ function makeCommonConfig() {
                 chunks: ['main'],
                 template: 'html-templates/page.ejs',
                 filename: 'index.html',
-                publicPath: '{{.BaseURL}}/',
+                publicPath: isDev ? '/' : '{{.BaseURL}}/',
                 hash: true,
             }),
         ],

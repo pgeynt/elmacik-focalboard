@@ -106,7 +106,7 @@ function createBoard(board?: Board): Board {
     if (!selectProperties) {
         const property: IPropertyTemplate = {
             id: Utils.createGuid(IDType.BlockID),
-            name: 'Status',
+            name: 'Durum',
             type: 'select',
             options: [],
         }

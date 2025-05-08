@@ -58,7 +58,7 @@ const Comment: FC<Props> = (props: Props) => {
                             <Menu.Text
                                 icon={<DeleteIcon/>}
                                 id='delete'
-                                name={intl.formatMessage({id: 'Comment.delete', defaultMessage: 'Delete'})}
+                                name={intl.formatMessage({id: 'Comment.delete', defaultMessage: 'Sil'})}
                                 onClick={() => mutator.deleteBlock(comment)}
                             />
                         </Menu>

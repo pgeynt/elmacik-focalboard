@@ -68,14 +68,14 @@ const CardDetailProperties = (props: Props) => {
 
         const subTextString = intl.formatMessage({
             id: 'CardDetailProperty.property-name-change-subtext',
-            defaultMessage: 'type from "{oldPropType}" to "{newPropType}"',
+            defaultMessage: 'türünü "{oldPropType}" türünden "{newPropType}" türüne',
         }, {oldPropType: oldType.displayName(intl), newPropType: newType.displayName(intl)})
 
         setConfirmationDialogBox({
-            heading: intl.formatMessage({id: 'CardDetailProperty.confirm-property-type-change', defaultMessage: 'Confirm property type change'}),
+            heading: intl.formatMessage({id: 'CardDetailProperty.confirm-property-type-change', defaultMessage: 'Özellik türü değişikliğini onayla'}),
             subText: intl.formatMessage({
                 id: 'CardDetailProperty.confirm-property-name-change-subtext',
-                defaultMessage: 'Are you sure you want to change property "{propertyName}" {customText}? This will affect value(s) across {numOfCards} card(s) in this board, and can result in data loss.',
+                defaultMessage: '"{propertyName}" özelliğinin {customText} değiştirmek istediğinizden emin misiniz? Bu, bu panodaki {numOfCards} karttaki değer(ler)i etkileyecek ve veri kaybına neden olabilir.',
             },
             {
                 propertyName: propertyTemplate.name,
@@ -83,7 +83,7 @@ const CardDetailProperties = (props: Props) => {
                 numOfCards: affectsNumOfCards,
             }),
 
-            confirmButtonText: intl.formatMessage({id: 'CardDetailProperty.property-change-action-button', defaultMessage: 'Change property'}),
+            confirmButtonText: intl.formatMessage({id: 'CardDetailProperty.property-change-action-button', defaultMessage: 'Özelliği değiştir'}),
             onConfirm: async () => {
                 setShowConfirmationDialog(false)
                 try {
@@ -91,7 +91,7 @@ const CardDetailProperties = (props: Props) => {
                 } catch (err: any) {
                     Utils.logError(`Error Changing Property And Name:${propertyTemplate.name}: ${err?.toString()}`)
                 }
-                sendFlashMessage({content: intl.formatMessage({id: 'CardDetailProperty.property-changed', defaultMessage: 'Changed property successfully!'}), severity: 'high'})
+                sendFlashMessage({content: intl.formatMessage({id: 'CardDetailProperty.property-changed', defaultMessage: 'Özellik başarıyla değiştirildi!'}), severity: 'high'})
             },
             onClose: () => setShowConfirmationDialog(false),
         })
@@ -103,19 +103,19 @@ const CardDetailProperties = (props: Props) => {
     function onPropertyDeleteSetAndOpenConfirmationDialog(propertyTemplate: IPropertyTemplate) {
         // set ConfirmationDialogBox Props
         setConfirmationDialogBox({
-            heading: intl.formatMessage({id: 'CardDetailProperty.confirm-delete-heading', defaultMessage: 'Confirm delete property'}),
+            heading: intl.formatMessage({id: 'CardDetailProperty.confirm-delete-heading', defaultMessage: 'Özelliği silmeyi onayla'}),
             subText: intl.formatMessage({
                 id: 'CardDetailProperty.confirm-delete-subtext',
-                defaultMessage: 'Are you sure you want to delete the property "{propertyName}"? Deleting it will delete the property from all cards in this board.',
+                defaultMessage: '"{propertyName}" özelliğini silmek istediğinizden emin misiniz? Silmek, özelliği bu panodaki tüm kartlardan silecektir.',
             },
             {propertyName: propertyTemplate.name}),
-            confirmButtonText: intl.formatMessage({id: 'CardDetailProperty.delete-action-button', defaultMessage: 'Delete'}),
+            confirmButtonText: intl.formatMessage({id: 'CardDetailProperty.delete-action-button', defaultMessage: 'Sil'}),
             onConfirm: async () => {
                 const deletingPropName = propertyTemplate.name
                 setShowConfirmationDialog(false)
                 try {
                     await mutator.deleteProperty(board, views, cards, propertyTemplate.id)
-                    sendFlashMessage({content: intl.formatMessage({id: 'CardDetailProperty.property-deleted', defaultMessage: 'Deleted {propertyName} successfully!'}, {propertyName: deletingPropName}), severity: 'high'})
+                    sendFlashMessage({content: intl.formatMessage({id: 'CardDetailProperty.property-deleted', defaultMessage: '{propertyName} başarıyla silindi!'}, {propertyName: deletingPropName}), severity: 'high'})
                 } catch (err: any) {
                     Utils.logError(`Error Deleting Property!: Could Not delete Property -" + ${deletingPropName} ${err?.toString()}`)
                 }
@@ -172,12 +172,12 @@ const CardDetailProperties = (props: Props) => {
                         <Button>
                             <FormattedMessage
                                 id='CardDetail.add-property'
-                                defaultMessage='+ Add a property'
+                                defaultMessage='+ Özellik ekle'
                             />
                         </Button>
                         <Menu>
                             <PropertyTypes
-                                label={intl.formatMessage({id: 'PropertyMenu.selectType', defaultMessage: 'Select property type'})}
+                                label={intl.formatMessage({id: 'PropertyMenu.selectType', defaultMessage: 'Özellik türünü seçin'})}
                                 onTypeSelected={async (type) => {
                                     const template: IPropertyTemplate = {
                                         id: Utils.createGuid(IDType.BlockID),

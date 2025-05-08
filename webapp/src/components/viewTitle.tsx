@@ -55,7 +55,7 @@ const ViewTitle = (props: Props) => {
                     >
                         <FormattedMessage
                             id='TableComponent.add-icon'
-                            defaultMessage='Add icon'
+                            defaultMessage='İkon ekle'
                         />
                     </Button>
                 }
@@ -71,7 +71,7 @@ const ViewTitle = (props: Props) => {
                     >
                         <FormattedMessage
                             id='ViewTitle.hide-description'
-                            defaultMessage='hide description'
+                            defaultMessage='açıklamayı gizle'
                         />
                     </Button>
                 }
@@ -87,7 +87,7 @@ const ViewTitle = (props: Props) => {
                     >
                         <FormattedMessage
                             id='ViewTitle.show-description'
-                            defaultMessage='show description'
+                            defaultMessage='açıklamayı göster'
                         />
                     </Button>
                 }
@@ -101,7 +101,7 @@ const ViewTitle = (props: Props) => {
                 <Editable
                     className='title'
                     value={title}
-                    placeholderText={intl.formatMessage({id: 'ViewTitle.untitled-board', defaultMessage: 'Untitled board'})}
+                    placeholderText={intl.formatMessage({id: 'ViewTitle.untitled-board', defaultMessage: 'İsimsiz pano'})}
                     onChange={(newTitle) => setTitle(newTitle)}
                     saveOnEsc={true}
                     onSave={onEditTitleSave}
@@ -115,7 +115,7 @@ const ViewTitle = (props: Props) => {
                 <div className='description'>
                     <MarkdownEditor
                         text={board.description}
-                        placeholderText='Add a description...'
+                        placeholderText='Açıklama ekle...'
                         onBlur={onDescriptionBlur}
                         readonly={readonly}
                     />

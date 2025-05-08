@@ -57,7 +57,7 @@ const ImageElement = (props: Props): JSX.Element|null => {
 
 contentRegistry.registerContentType({
     type: 'image',
-    getDisplayText: (intl: IntlShape) => intl.formatMessage({id: 'ContentBlock.image', defaultMessage: 'image'}),
+    getDisplayText: (intl: IntlShape) => intl.formatMessage({id: 'ContentBlock.image', defaultMessage: 'resim'}),
     getIcon: () => <ImageIcon/>,
     createBlock: async (boardId: string, intl: IntlShape) => {
         return new Promise<ImageBlock>(
@@ -70,7 +70,7 @@ contentRegistry.registerContentType({
                         block.fields.fileId = fileId || ''
                         resolve(block)
                     } else {
-                        sendFlashMessage({content: intl.formatMessage({id: 'createImageBlock.failed', defaultMessage: 'Unable to upload the file. File size limit reached.'}), severity: 'normal'})
+                        sendFlashMessage({content: intl.formatMessage({id: 'createImageBlock.failed', defaultMessage: 'Dosya yüklenemedi. Dosya boyutu sınırına ulaşıldı.'}), severity: 'normal'})
                     }
                 },
                 '.jpg,.jpeg,.png,.gif')

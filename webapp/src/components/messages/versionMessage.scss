@@ -1,38 +1,25 @@
-// Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
-// See LICENSE.txt for license information.
 .VersionMessage {
-    background-color: rgb(var(--sidebar-text-active-border-rgb));
     display: flex;
-    flex-direction: row;
     align-items: center;
-    text-align: center;
-    font-weight: 600;
+    justify-content: space-between;
+    background-color: rgba(28, 88, 217, 0.08);
+    color: rgb(28, 88, 217);
+    padding: 10px 20px;
+    border-radius: 4px;
+    margin: 10px 0;
 
-    div {
-        width: 100%;
-    }
-
-    > .banner {
+    .banner {
         display: flex;
-        flex-direction: row;
         align-items: center;
-        justify-content: center;
-        padding: 10px;
-        color: #fff;
-
-        .CompassIcon {
-            font-size: 18px;
-            margin-right: 2px;
-        }
-
-        .Button {
-            margin-left: 8px;
-            background-color: rgba(255, 255, 255, 0.16);
-        }
+        gap: 8px;
     }
 
-    .IconButton {
-        float: right;
-        color: #fff;
+    .CompassIcon {
+        color: rgb(28, 88, 217);
+        margin-right: 8px;
+    }
+
+    .margin-right {
+        margin-right: 0;
     }
 }

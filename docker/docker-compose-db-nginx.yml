@@ -1,35 +1,16 @@
-version: "3"
-
 services:
-  app:
+  focalboard:
     build:
-      context: ../
-      dockerfile: docker/Dockerfile
+      context: ..                   # bir üst dizin = proje kökü
+      dockerfile: docker/Dockerfile # proje kökünden Dockerfile yolu
     container_name: focalboard
     depends_on:
       - focalboard-db
-    expose:
-      - 8000
-    environment:
-      - VIRTUAL_HOST=localhost
-      - VIRTUAL_PORT=8000
-      - VIRTUAL_PROTO=http
-    volumes:
-      - "./config.json:/opt/focalboard/config.json"
-      - fbdata:/opt/focalboard/data
-    restart: always
-    networks:
-      - proxy
-      - default
-
-  proxy:
-    image: jwilder/nginx-proxy:latest
-    container_name: focalboard-proxy
-    restart: always
     ports:
-      - 80:80
+      - "8000:8000"                 # Host 8000 → Container 8000
     volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - fbdata:/opt/focalboard/data
+      - ../config/config.json:/opt/focalboard/config.json   # yalnızca bu dosyayı override ediyoruz
     networks:
       - proxy
 
@@ -37,12 +18,16 @@ services:
     image: postgres:latest
     container_name: focalboard-postgres
     restart: always
+    ports:
+      - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: boards
       POSTGRES_USER: boardsuser
       POSTGRES_PASSWORD: boardsuser-password
+    networks:
+      - proxy
 
 volumes:
   fbdata:
@@ -50,4 +35,3 @@ volumes:
 
 networks:
   proxy:
-

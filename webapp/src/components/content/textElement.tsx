@@ -39,7 +39,7 @@ const TextElement = ({block, readonly}: Props): JSX.Element => {
         if (text !== block.title || blockTitle !== block.title) {
             const textSize = new Blob([text]).size
             if (textSize <= BlockTitleMaxRunes) {
-                mutator.changeBlockTitle(block.boardId, block.id, block.title, text, intl.formatMessage({id: 'ContentBlock.editCardText', defaultMessage: 'edit card text'})).
+                mutator.changeBlockTitle(block.boardId, block.id, block.title, text, intl.formatMessage({id: 'ContentBlock.editCardText', defaultMessage: 'kart metnini düzenle'})).
                     finally(() => {
                         setIsError(false)
                     })
@@ -52,19 +52,19 @@ const TextElement = ({block, readonly}: Props): JSX.Element => {
             <MarkdownEditor
                 className={cx({'markdown-editor-error': isError})}
                 text={blockTitle}
-                placeholderText={intl.formatMessage({id: 'ContentBlock.editText', defaultMessage: 'Edit text...'})}
+                placeholderText={intl.formatMessage({id: 'ContentBlock.editText', defaultMessage: 'Metni düzenle...'})}
                 onChange={textChangedHandler}
                 onBlur={handleBlur}
                 readonly={readonly}
             />
-            {isError && <div className='error-message'>{intl.formatMessage({id: 'ContentBlock.errorText', defaultMessage: 'You\'ve exceeded the size limit for this content. Please shorten it to avoid losing data.'})}</div>}
+            {isError && <div className='error-message'>{intl.formatMessage({id: 'ContentBlock.errorText', defaultMessage: 'Bu içerik için boyut sınırını aştınız. Veri kaybını önlemek için lütfen içeriği kısaltın.'})}</div>}
         </div>
     )
 }
 
 contentRegistry.registerContentType({
     type: 'text',
-    getDisplayText: (intl) => intl.formatMessage({id: 'ContentBlock.text', defaultMessage: 'text'}),
+    getDisplayText: (intl) => intl.formatMessage({id: 'ContentBlock.text', defaultMessage: 'metin'}),
     getIcon: () => <TextIcon/>,
     createBlock: async () => {
         return createTextBlock()

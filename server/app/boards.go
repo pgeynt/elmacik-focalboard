@@ -547,6 +547,19 @@ func (a *App) AddMemberToBoard(member *model.BoardMember) (*model.BoardMember, e
 		}
 	}
 
+	// Kullanıcı ekleme işlemi yapan kişi mevcut session'dan alınır
+	// Bu bilgiye erişebilmek için userID'yi alıyoruz
+	sessionUserID := a.auth.GetUserID()
+
+	// Kullanıcı bildirim oluştur (kendi kendini eklemiyorsa)
+	if sessionUserID != "" && sessionUserID != member.UserID {
+		user, userErr := a.store.GetUserByID(sessionUserID)
+		if userErr == nil && user != nil {
+			// Eklenen kullanıcıya bildirim gönder
+			_ = a.CreateBoardMembershipNotification(user, member.UserID, member.BoardID)
+		}
+	}
+
 	a.blockChangeNotifier.Enqueue(func() error {
 		a.wsAdapter.BroadcastMemberChange(board.TeamID, member.BoardID, member)
 		return nil

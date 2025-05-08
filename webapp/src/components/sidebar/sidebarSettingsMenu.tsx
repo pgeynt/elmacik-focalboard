@@ -85,33 +85,6 @@ const SidebarSettingsMenu = (props: Props) => {
                     />
                 </div>
                 <Menu position='top'>
-                    <Menu.SubMenu
-                        id='import'
-                        name={intl.formatMessage({id: 'Sidebar.import', defaultMessage: 'Import'})}
-                        position='top'
-                    >
-                        <Menu.Text
-                            id='import_archive'
-                            name={intl.formatMessage({id: 'Sidebar.import-archive', defaultMessage: 'Import archive'})}
-                            onClick={async () => {
-                                TelemetryClient.trackEvent(TelemetryCategory, TelemetryActions.ImportArchive)
-                                Archiver.importFullArchive()
-                            }}
-                        />
-                        {
-                            Constants.imports.map((i) => (
-                                <Menu.Text
-                                    key={`${i.id}-import`}
-                                    id={`${i.id}-import`}
-                                    name={i.displayName}
-                                    onClick={() => {
-                                        TelemetryClient.trackEvent(TelemetryCategory, i.telemetryName)
-                                        window.open(i.href)
-                                    }}
-                                />
-                            ))
-                        }
-                    </Menu.SubMenu>
                     <Menu.Text
                         id='export'
                         name={intl.formatMessage({id: 'Sidebar.export-archive', defaultMessage: 'Export archive'})}
@@ -122,23 +95,6 @@ const SidebarSettingsMenu = (props: Props) => {
                             }
                         }}
                     />
-                    <Menu.SubMenu
-                        id='lang'
-                        name={intl.formatMessage({id: 'Sidebar.set-language', defaultMessage: 'Set language'})}
-                        position='top'
-                    >
-                        {
-                            Constants.languages.map((language) => (
-                                <Menu.Text
-                                    key={language.code}
-                                    id={`${language.name}-lang`}
-                                    name={language.displayName}
-                                    onClick={async () => dispatch(storeLanguage(language.code))}
-                                    rightIcon={intl.locale.toLowerCase() === language.code ? <CheckIcon/> : null}
-                                />
-                            ))
-                        }
-                    </Menu.SubMenu>
                     <Menu.SubMenu
                         id='theme'
                         name={intl.formatMessage({id: 'Sidebar.set-theme', defaultMessage: 'Set theme'})}

@@ -28,7 +28,7 @@ const BaseTextEditor = (props: PropertyProps & {validator: () => boolean, spellC
     }
 
     const intl = useIntl()
-    const emptyDisplayValue = props.showEmptyPlaceholder ? intl.formatMessage({id: 'PropertyValueElement.empty', defaultMessage: 'Empty'}) : ''
+    const emptyDisplayValue = props.showEmptyPlaceholder ? intl.formatMessage({id: 'PropertyValueElement.empty', defaultMessage: 'Boş'}) : ''
 
     useEffect(() => {
         return () => {

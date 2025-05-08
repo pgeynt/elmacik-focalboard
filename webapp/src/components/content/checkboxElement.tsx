@@ -55,13 +55,13 @@ const CheckboxElement = (props: Props) => {
                     newBlock.fields.value = !active
                     newBlock.title = title
                     setActive(newBlock.fields.value)
-                    mutator.updateBlock(block.boardId, newBlock, block, intl.formatMessage({id: 'ContentBlock.editCardCheckbox', defaultMessage: 'toggled-checkbox'}))
+                    mutator.updateBlock(block.boardId, newBlock, block, intl.formatMessage({id: 'ContentBlock.editCardCheckbox', defaultMessage: 'onay kutusu değiştirildi'}))
                 }}
             />
             <Editable
                 ref={titleRef}
                 value={title}
-                placeholderText={intl.formatMessage({id: 'ContentBlock.editText', defaultMessage: 'Edit text...'})}
+                placeholderText={intl.formatMessage({id: 'ContentBlock.editText', defaultMessage: 'Metni düzenle...'})}
                 onChange={setTitle}
                 saveOnEsc={true}
                 onSave={async (saveType) => {
@@ -72,7 +72,7 @@ const CheckboxElement = (props: Props) => {
                     }
 
                     if (block.title !== title) {
-                        await mutator.changeBlockTitle(block.boardId, block.id, block.title, title, intl.formatMessage({id: 'ContentBlock.editCardCheckboxText', defaultMessage: 'edit card text'}))
+                        await mutator.changeBlockTitle(block.boardId, block.id, block.title, title, intl.formatMessage({id: 'ContentBlock.editCardCheckboxText', defaultMessage: 'kart metnini düzenle'}))
                         if (saveType === 'onEnter' && title !== '' && props.onAddElement) {
                             // Wait for the change to happen
                             setTimeout(props.onAddElement, 100)
@@ -93,7 +93,7 @@ const CheckboxElement = (props: Props) => {
 
 contentRegistry.registerContentType({
     type: 'checkbox',
-    getDisplayText: (intl) => intl.formatMessage({id: 'ContentBlock.checkbox', defaultMessage: 'checkbox'}),
+    getDisplayText: (intl) => intl.formatMessage({id: 'ContentBlock.checkbox', defaultMessage: 'onay kutusu'}),
     getIcon: () => <CheckIcon/>,
     createBlock: async () => {
         return createCheckboxBlock()

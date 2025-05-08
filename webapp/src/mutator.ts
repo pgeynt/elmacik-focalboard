@@ -408,11 +408,63 @@ class Mutator {
             return ''
         }
 
-        const newTemplate = template || {
+        const newTemplate: IPropertyTemplate = template || {
             id: Utils.createGuid(IDType.BlockID),
-            name: 'New Property',
+            name: 'Yeni Özellik',
             type: 'text',
             options: [],
+        }
+
+        // Special handling for specific property types
+        if (newTemplate.type === 'select' && !template) {
+            newTemplate.options = [
+                {
+                    id: Utils.createGuid(IDType.None),
+                    value: 'Seçenek 1',
+                    color: 'propColorDefault',
+                },
+            ]
+        }
+
+        // Special handling for specific known property names
+        if (newTemplate.name === 'Durum' && newTemplate.type === 'select' && (!template || !template.options || template.options.length === 0)) {
+            newTemplate.options = [
+                {
+                    id: Utils.createGuid(IDType.None),
+                    value: 'Bekliyor',
+                    color: 'propColorGray',
+                },
+                {
+                    id: Utils.createGuid(IDType.None),
+                    value: 'Yapılıyor',
+                    color: 'propColorYellow',
+                },
+                {
+                    id: Utils.createGuid(IDType.None),
+                    value: 'Tamamlandı',
+                    color: 'propColorGreen',
+                },
+            ]
+        }
+
+        if (newTemplate.name === 'Öncelik' && newTemplate.type === 'select' && (!template || !template.options || template.options.length === 0)) {
+            newTemplate.options = [
+                {
+                    id: Utils.createGuid(IDType.None),
+                    value: 'Düşük',
+                    color: 'propColorGray',
+                },
+                {
+                    id: Utils.createGuid(IDType.None),
+                    value: 'Normal',
+                    color: 'propColorYellow',
+                },
+                {
+                    id: Utils.createGuid(IDType.None),
+                    value: 'Yüksek',
+                    color: 'propColorRed',
+                },
+            ]
         }
 
         const oldBlocks: Block[] = []
@@ -1156,13 +1208,13 @@ class Mutator {
         const boardTemplate = createBoard()
         boardTemplate.isTemplate = true
         boardTemplate.teamId = teamId
-        boardTemplate.title = intl.formatMessage({id: 'View.NewTemplateDefaultTitle', defaultMessage: 'Untitled Template'})
+        boardTemplate.title = intl.formatMessage({id: 'View.NewTemplateDefaultTitle', defaultMessage: 'Başlıksız Şablon'})
 
         const view = createBoardView()
         view.fields.viewType = 'board'
         view.parentId = boardTemplate.id
         view.boardId = boardTemplate.id
-        view.title = intl.formatMessage({id: 'View.NewBoardTitle', defaultMessage: 'Board view'})
+        view.title = intl.formatMessage({id: 'View.NewBoardTitle', defaultMessage: 'Pano görünümü'})
 
         return mutator.createBoardsAndBlocks(
             {boards: [boardTemplate], blocks: [view]},

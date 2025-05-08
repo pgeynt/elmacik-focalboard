@@ -149,7 +149,7 @@ const BoardTemplateSelector = (props: Props) => {
                         {title || (
                             <FormattedMessage
                                 id='BoardTemplateSelector.title'
-                                defaultMessage='Create a board'
+                                defaultMessage='Bir pano oluştur'
                             />
                         )}
                     </h1>
@@ -157,7 +157,7 @@ const BoardTemplateSelector = (props: Props) => {
                         {description || (
                             <FormattedMessage
                                 id='BoardTemplateSelector.description'
-                                defaultMessage='Add a board to the sidebar using any of the templates defined below or start from scratch.'
+                                defaultMessage='Aşağıda tanımlanan şablonlardan birini kullanarak kenar çubuğuna bir pano ekleyin veya sıfırdan başlayın.'
                             />
                         )}
                     </p>
@@ -174,7 +174,7 @@ const BoardTemplateSelector = (props: Props) => {
                             >
                                 <FormattedMessage
                                     id='BoardTemplateSelector.add-template'
-                                    defaultMessage='Create new template'
+                                    defaultMessage='Yeni şablon oluştur'
                                 />
                             </Button>
                             {allTemplates.map((boardTemplate) => (
@@ -201,7 +201,7 @@ const BoardTemplateSelector = (props: Props) => {
                             >
                                 <FormattedMessage
                                     id='BoardTemplateSelector.create-empty-board'
-                                    defaultMessage='Create empty board'
+                                    defaultMessage='Boş pano oluştur'
                                 />
                             </Button>
                         </div>
@@ -218,7 +218,7 @@ const BoardTemplateSelector = (props: Props) => {
                             >
                                 <FormattedMessage
                                     id='BoardTemplateSelector.use-this-template'
-                                    defaultMessage='Use this template'
+                                    defaultMessage='Bu şablonu kullan'
                                 />
                             </Button>
                         </div>

@@ -159,6 +159,15 @@ type Store interface {
 	GetCardLimitTimestamp() (int64, error)
 	UpdateCardLimitTimestamp(cardLimit int) (int64, error)
 
+	// Bildirim işlemleri
+	SaveNotification(notification *model.Notification) (*model.Notification, error)
+	GetNotificationsForUser(userID string, limit, offset int) ([]*model.Notification, error)
+	GetUnreadNotificationsCountForUser(userID string) (int, error)
+	GetNotification(notificationID string) (*model.Notification, error)
+	UpdateNotificationReadStatus(notificationID string, read bool) error
+	DeleteNotification(notificationID string) error
+	DeleteNotificationsForUser(userID string) error
+
 	DBType() string
 	DBVersion() string
 

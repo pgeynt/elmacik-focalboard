@@ -287,7 +287,7 @@ const BoardPage = (props: Props): JSX.Element => {
                     <SetWindowTitleAndIcon/>
                     <UndoRedoHotKeys/>
                     <WebsocketConnection/>
-                    <VersionMessage/>
+                    {/* VersionMessage gizlendi: kullanıcıya gösterilmiyor */}
 
                     {!mobileWarningClosed &&
                         <div className='mobileWarning'>

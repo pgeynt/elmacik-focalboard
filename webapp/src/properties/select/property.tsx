@@ -17,7 +17,7 @@ export default class SelectProperty extends PropertyType {
     canFilter = true
     filterValueType = 'options' as FilterValueType
 
-    displayName = (intl: IntlShape) => intl.formatMessage({id: 'PropertyType.Select', defaultMessage: 'Select'})
+    displayName = (intl: IntlShape) => intl.formatMessage({id: 'PropertyType.Select', defaultMessage: 'Seçim'})
 
     displayValue = (propertyValue: string | string[] | undefined, card: Card, propertyTemplate: IPropertyTemplate) => {
         if (propertyValue) {

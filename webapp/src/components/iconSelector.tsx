@@ -32,20 +32,20 @@ const IconSelector = React.memo((props: Props) => {
                         <Menu.Text
                             id='random'
                             icon={<RandomIcon/>}
-                            name={intl.formatMessage({id: 'ViewTitle.random-icon', defaultMessage: 'Random'})}
+                            name={intl.formatMessage({id: 'ViewTitle.random-icon', defaultMessage: 'Rastgele'})}
                             onClick={props.onAddRandomIcon}
                         />
                         <Menu.SubMenu
                             id='pick'
                             icon={<EmojiIcon/>}
-                            name={intl.formatMessage({id: 'ViewTitle.pick-icon', defaultMessage: 'Pick icon'})}
+                            name={intl.formatMessage({id: 'ViewTitle.pick-icon', defaultMessage: 'İkon seç'})}
                         >
                             <EmojiPicker onSelect={props.onSelectEmoji}/>
                         </Menu.SubMenu>
                         <Menu.Text
                             id='remove'
                             icon={<DeleteIcon/>}
-                            name={intl.formatMessage({id: 'ViewTitle.remove-icon', defaultMessage: 'Remove icon'})}
+                            name={intl.formatMessage({id: 'ViewTitle.remove-icon', defaultMessage: 'İkonu kaldır'})}
                             onClick={props.onRemoveIcon}
                         />
                     </Menu>

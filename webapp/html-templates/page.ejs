@@ -7,8 +7,8 @@
 
     <title><%= htmlWebpackPlugin.options.title %></title>
 
-    <script>window.baseURL = '{{.BaseURL}}'</script>
-    <link rel="icon" href="{{.BaseURL}}/static/favicon.svg?v=1" />
+    <script>window.baseURL = '<%= htmlWebpackPlugin.options.publicPath %>'</script>
+    <link rel="icon" href="<%= htmlWebpackPlugin.options.publicPath %>static/favicon.svg?v=1" />
 </head>
 
 <body class="focalboard-body">

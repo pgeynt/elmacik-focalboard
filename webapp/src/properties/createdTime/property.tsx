@@ -16,7 +16,7 @@ export default class CreatedAtProperty extends DatePropertyType {
     name = 'Created At'
     type = 'createdTime' as PropertyTypeEnum
     isReadOnly = true
-    displayName = (intl: IntlShape) => intl.formatMessage({id: 'PropertyType.CreatedTime', defaultMessage: 'Created time'})
+    displayName = (intl: IntlShape) => intl.formatMessage({id: 'PropertyType.CreatedTime', defaultMessage: 'Oluşturulma zamanı'})
     calculationOptions = [Options.none, Options.count, Options.countEmpty,
         Options.countNotEmpty, Options.percentEmpty, Options.percentNotEmpty,
         Options.countValue, Options.countUniqueValue, Options.earliest,

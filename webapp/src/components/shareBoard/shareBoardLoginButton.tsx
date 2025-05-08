@@ -33,14 +33,14 @@ const ShareBoardLoginButton = () => {
     return (
         <div className='ShareBoardLoginButton'>
             <Button
-                title='Login'
+                title='Giriş'
                 size='medium'
                 emphasis='primary'
                 onClick={() => onLoginClick()}
             >
                 <FormattedMessage
                     id='CenterPanel.Login'
-                    defaultMessage='Login'
+                    defaultMessage='Giriş'
                 />
             </Button>
         </div>

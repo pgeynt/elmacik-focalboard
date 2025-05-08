@@ -11,7 +11,7 @@ export default class NumberProperty extends PropertyType {
     Editor = NumberProp
     name = 'Number'
     type = 'number' as PropertyTypeEnum
-    displayName = (intl: IntlShape) => intl.formatMessage({id: 'PropertyType.Number', defaultMessage: 'Number'})
+    displayName = (intl: IntlShape) => intl.formatMessage({id: 'PropertyType.Number', defaultMessage: 'Sayı'})
     calculationOptions = [Options.none, Options.count, Options.countEmpty,
         Options.countNotEmpty, Options.percentEmpty, Options.percentNotEmpty,
         Options.countValue, Options.countUniqueValue, Options.sum,

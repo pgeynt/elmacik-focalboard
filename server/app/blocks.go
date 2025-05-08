@@ -82,6 +82,91 @@ func (a *App) PatchBlockAndNotify(blockID string, blockPatch *model.BlockPatch, 
 	if err != nil {
 		return nil, err
 	}
+
+	// Kullanıcı atama için bildirim gönderme
+	if oldBlock.Type == model.TypeCard && block.Type == model.TypeCard {
+		// Kartın güncellenmiş özelliklerini kontrol edelim
+		if blockPatch.UpdatedFields != nil {
+			if properties, ok := blockPatch.UpdatedFields["properties"].(map[string]interface{}); ok {
+				// Tüm kart özellikleri içinde gezinelim ve kullanıcı atama özelliklerini kontrol edelim
+				for propertyID, newValue := range properties {
+					// Önce özelliğin türünü kontrol edelim (pano özelliklerinden)
+					for _, prop := range board.CardProperties {
+						if propID, ok := prop["id"].(string); ok && propID == propertyID {
+							propType, _ := prop["type"].(string)
+							// Kişi tipi özellikler için
+							if propType == "person" || propType == "multiPerson" {
+								// Eski değeri alalım
+								var oldValues []string
+								var newValues []string
+								
+								if oldBlock.Fields != nil {
+									if oldProps, ok := oldBlock.Fields["properties"].(map[string]interface{}); ok {
+										if oldValueI, ok := oldProps[propertyID]; ok {
+											// Tek kişi atama
+											if oldValueStr, ok := oldValueI.(string); ok && oldValueStr != "" {
+												oldValues = append(oldValues, oldValueStr)
+											}
+											// Çoklu kişi atama
+											if oldValueArr, ok := oldValueI.([]interface{}); ok {
+												for _, v := range oldValueArr {
+													if userID, ok := v.(string); ok && userID != "" {
+														oldValues = append(oldValues, userID)
+													}
+												}
+											}
+										}
+									}
+								}
+								
+								// Yeni değerleri alalım
+								if newValueStr, ok := newValue.(string); ok && newValueStr != "" {
+									newValues = append(newValues, newValueStr)
+								}
+								if newValueArr, ok := newValue.([]interface{}); ok {
+									for _, v := range newValueArr {
+										if userID, ok := v.(string); ok && userID != "" {
+											newValues = append(newValues, userID)
+										}
+									}
+								}
+								
+								// Yeni atanan kullanıcıları bulalım
+								for _, newUserID := range newValues {
+									isNewAssignment := true
+									for _, oldUserID := range oldValues {
+										if newUserID == oldUserID {
+											isNewAssignment = false
+											break
+										}
+									}
+									
+									// Yeni bir atama ise ve atanan kişi, atamayı yapan değilse bildirim gönderelim
+									if isNewAssignment && newUserID != modifiedByID {
+										// Atama yapan kullanıcı bilgilerini alalım
+										assignedBy, err := a.store.GetUserByID(modifiedByID)
+										if err == nil && assignedBy != nil {
+											// Kart başlığını alalım
+											cardTitle := block.Title
+											if cardTitle == "" {
+												cardTitle = "Untitled"
+											}
+											
+											// Bildirim gönderelim
+											_ = a.CreateCardAssignmentNotification(assignedBy, newUserID, block.BoardID, block.ID, cardTitle)
+										}
+									}
+								}
+								
+								break
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
 	a.blockChangeNotifier.Enqueue(func() error {
 		// broadcast on websocket
 		a.wsAdapter.BroadcastBlockChange(board.TeamID, block)

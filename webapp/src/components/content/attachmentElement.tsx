@@ -94,8 +94,8 @@ const AttachmentElement = (props: Props): JSX.Element|null => {
     }
 
     const confirmDialogProps: ConfirmationDialogBoxProps = {
-        heading: intl.formatMessage({id: 'CardDialog.delete-confirmation-dialog-attachment', defaultMessage: 'Confirm Attachment delete!'}),
-        confirmButtonText: intl.formatMessage({id: 'AttachmentElement.delete-confirmation-dialog-button-text', defaultMessage: 'Delete'}),
+        heading: intl.formatMessage({id: 'CardDialog.delete-confirmation-dialog-attachment', defaultMessage: 'Ek silmeyi onayla!'}),
+        confirmButtonText: intl.formatMessage({id: 'AttachmentElement.delete-confirmation-dialog-button-text', defaultMessage: 'Sil'}),
         onConfirm: deleteAttachment,
         onClose: () => {
             setShowConfirmationDialogBox(false)
@@ -146,7 +146,7 @@ const AttachmentElement = (props: Props): JSX.Element|null => {
                 {block.isUploading && <div className='fileElement-file-uploading'>
                     {intl.formatMessage({
                         id: 'AttachmentElement.upload-percentage',
-                        defaultMessage: 'Uploading...({uploadPercent}%)',
+                        defaultMessage: 'Yükleniyor...({uploadPercent}%)',
                     }, {
                         uploadPercent,
                     })}
@@ -185,7 +185,7 @@ const AttachmentElement = (props: Props): JSX.Element|null => {
                     </MenuWrapper>
                 </BoardPermissionGate>
                 <Tooltip
-                    title={intl.formatMessage({id: 'AttachmentElement.download', defaultMessage: 'Download'})}
+                    title={intl.formatMessage({id: 'AttachmentElement.download', defaultMessage: 'İndir'})}
                     placement='bottom'
                 >
                     <div

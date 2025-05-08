@@ -94,7 +94,7 @@ const filterValue = (props: Props): JSX.Element|null => {
             return option?.value || '(Unknown)'
         }).join(', ')
     } else {
-        displayValue = intl.formatMessage({id: 'FilterValue.empty', defaultMessage: '(empty)'})
+        displayValue = intl.formatMessage({id: 'FilterValue.empty', defaultMessage: '(boş)'})
     }
 
     return (

@@ -1,6 +1,16 @@
 .FocalboardLogoIcon {
-    width: 32px;
-    height: 32px;
-    fill: rgba(var(--sidebar-text-rgb), 0.7);
+    width: 24px;
+    height: 24px;
+    fill: rgba(var(--center-channel-color-rgb), 0.56);
+
+    &.elmacik-logo {
+        width: auto;
+        height: auto;
+        font-weight: bold;
+        font-size: 18px;
+        color: rgba(var(--center-channel-color-rgb), 0.9);
+        display: flex;
+        align-items: center;
+    }
 }
 

@@ -33,19 +33,19 @@ export default function DeleteBoardDialog(props: Props): JSX.Element {
                         {props.isTemplate &&
                             <FormattedMessage
                                 id='DeleteBoardDialog.confirm-tite-template'
-                                defaultMessage='Confirm delete board template'
+                                defaultMessage='Pano şablonunu silmeyi onayla'
                             />}
                         {!props.isTemplate &&
                             <FormattedMessage
                                 id='DeleteBoardDialog.confirm-tite'
-                                defaultMessage='Confirm delete board'
+                                defaultMessage='Panoyu silmeyi onayla'
                             />}
                     </h2>
                     <p className='body'>
                         {props.isTemplate &&
                             <FormattedMessage
                                 id='DeleteBoardDialog.confirm-info-template'
-                                defaultMessage='Are you sure you want to delete the board template “{boardTitle}”?'
+                                defaultMessage='"{boardTitle}" pano şablonunu silmek istediğinizden emin misiniz?'
                                 values={{
                                     boardTitle: props.boardTitle,
                                 }}
@@ -53,7 +53,7 @@ export default function DeleteBoardDialog(props: Props): JSX.Element {
                         {!props.isTemplate &&
                             <FormattedMessage
                                 id='DeleteBoardDialog.confirm-info'
-                                defaultMessage='Are you sure you want to delete the board “{boardTitle}”? Deleting it will delete all cards in the board.'
+                                defaultMessage='"{boardTitle}" panosunu silmek istediğinizden emin misiniz? Silmek, panodaki tüm kartları silecektir.'
                                 values={{
                                     boardTitle: props.boardTitle,
                                 }}
@@ -70,7 +70,7 @@ export default function DeleteBoardDialog(props: Props): JSX.Element {
                         >
                             <FormattedMessage
                                 id='DeleteBoardDialog.confirm-cancel'
-                                defaultMessage='Cancel'
+                                defaultMessage='İptal'
                             />
                         </Button>
                         <Button
@@ -94,7 +94,7 @@ export default function DeleteBoardDialog(props: Props): JSX.Element {
                         >
                             <FormattedMessage
                                 id='DeleteBoardDialog.confirm-delete'
-                                defaultMessage='Delete'
+                                defaultMessage='Sil'
                             />
                         </Button>
                     </div>

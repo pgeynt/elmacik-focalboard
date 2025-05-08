@@ -33,7 +33,7 @@ const ShareBoardButton = (props: Props) => {
     return (
         <div className='ShareBoardButton'>
             <Button
-                title='Share board'
+                title='Panoyu paylaş'
                 size='medium'
                 emphasis='primary'
                 icon={iconForBoardType()}
@@ -44,7 +44,7 @@ const ShareBoardButton = (props: Props) => {
             >
                 <FormattedMessage
                     id='CenterPanel.Share'
-                    defaultMessage='Share'
+                    defaultMessage='Paylaş'
                 />
             </Button>
             {showShareDialog &&

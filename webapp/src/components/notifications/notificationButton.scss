@@ -1,0 +1,45 @@
+.NotificationButton {
+    margin-left: 8px;
+    position: relative;
+    
+    &__button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 4px;
+        border: none;
+        background-color: transparent;
+        color: rgba(var(--center-channel-color-rgb), 0.56);
+        cursor: pointer;
+        position: relative;
+        
+        &:hover {
+            background-color: rgba(var(--center-channel-color-rgb), 0.08);
+            color: rgba(var(--center-channel-color-rgb), 0.72);
+        }
+        
+        &:active {
+            background-color: rgba(var(--center-channel-color-rgb), 0.16);
+            color: rgba(var(--center-channel-color-rgb), 1);
+        }
+    }
+    
+    &__unread-badge {
+        position: absolute;
+        top: -4px;
+        right: -4px;
+        min-width: 16px;
+        height: 16px;
+        padding: 0 4px;
+        border-radius: 8px;
+        background-color: var(--button-danger-bg);
+        color: var(--button-danger-color);
+        font-size: 10px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+} 

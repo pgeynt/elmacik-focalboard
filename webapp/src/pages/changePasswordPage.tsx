@@ -20,8 +20,8 @@ const ChangePasswordPage = () => {
     if (!user) {
         return (
             <div className='ChangePasswordPage'>
-                <div className='title'>{'Change Password'}</div>
-                <Link to='/login'>{'Log in first'}</Link>
+                <div className='title'>{'Şifre Değiştir'}</div>
+                <Link to='/login'>{'Önce giriş yapın'}</Link>
             </div>
         )
     }
@@ -34,13 +34,13 @@ const ChangePasswordPage = () => {
             setErrorMessage('')
             setSucceeded(true)
         } else {
-            setErrorMessage(`Change password failed: ${response.json?.error}`)
+            setErrorMessage(`Şifre değiştirme başarısız: ${response.json?.error}`)
         }
     }
 
     return (
         <div className='ChangePasswordPage'>
-            <div className='title'>{'Change Password'}</div>
+            <div className='title'>{'Şifre Değiştir'}</div>
             <form
                 onSubmit={(e: React.FormEvent) => {
                     e.preventDefault()
@@ -51,7 +51,7 @@ const ChangePasswordPage = () => {
                     <input
                         id='login-oldpassword'
                         type='password'
-                        placeholder={'Enter current password'}
+                        placeholder={'Mevcut şifreyi girin'}
                         value={oldPassword}
                         onChange={(e) => {
                             setOldPassword(e.target.value)
@@ -63,7 +63,7 @@ const ChangePasswordPage = () => {
                     <input
                         id='login-newpassword'
                         type='password'
-                        placeholder={'Enter new password'}
+                        placeholder={'Yeni şifreyi girin'}
                         value={newPassword}
                         onChange={(e) => {
                             setNewPassword(e.target.value)
@@ -75,7 +75,7 @@ const ChangePasswordPage = () => {
                     filled={true}
                     submit={true}
                 >
-                    {'Change password'}
+                    {'Şifre değiştir'}
                 </Button>
             </form>
             {errorMessage &&
@@ -87,10 +87,10 @@ const ChangePasswordPage = () => {
                 <Link
                     className='succeeded'
                     to='/'
-                >{'Password changed, click to continue.'}</Link>
+                >{'Şifre değiştirildi, devam etmek için tıklayın.'}</Link>
             }
             {!succeeded &&
-                <Link to='/'>{'Cancel'}</Link>
+                <Link to='/'>{'İptal'}</Link>
             }
         </div>
     )

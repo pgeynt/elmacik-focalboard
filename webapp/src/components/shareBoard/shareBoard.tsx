@@ -157,14 +157,14 @@ export default function ShareBoardDialog(props: Props): JSX.Element {
 
     const onRegenerateToken = async () => {
         // eslint-disable-next-line no-alert
-        const accept = window.confirm(intl.formatMessage({id: 'ShareBoard.confirmRegenerateToken', defaultMessage: 'This will invalidate previously shared links. Continue?'}))
+        const accept = window.confirm(intl.formatMessage({id: 'ShareBoard.confirmRegenerateToken', defaultMessage: 'Bu, daha önce paylaşılan bağlantıları geçersiz kılacaktır. Devam etmek istiyor musunuz?'}))
         if (accept) {
             const newSharing: ISharing = sharing || createSharingInfo()
             newSharing.token = Utils.createGuid(IDType.Token)
             await client.setSharing(boardId, newSharing)
             await loadData()
 
-            const description = intl.formatMessage({id: 'ShareBoard.tokenRegenrated', defaultMessage: 'Token regenerated'})
+            const description = intl.formatMessage({id: 'ShareBoard.tokenRegenrated', defaultMessage: 'Jeton yeniden oluşturuldu'})
             sendFlashMessage({content: description, severity: 'low'})
         }
     }
@@ -184,7 +184,7 @@ export default function ShareBoardDialog(props: Props): JSX.Element {
 
     const onUpdateBoardMember = (member: BoardMember, newPermission: string) => {
         if (member.userId === me?.id && isLastAdmin(Object.values(members))) {
-            sendFlashMessage({content: intl.formatMessage({id: 'shareBoard.lastAdmin', defaultMessage: 'Boards must have at least one Administrator'}), severity: 'low'})
+            sendFlashMessage({content: intl.formatMessage({id: 'shareBoard.lastAdmin', defaultMessage: 'Panoların en az bir Yöneticisi olmalıdır'}), severity: 'low'})
             return
         }
 
@@ -235,7 +235,7 @@ export default function ShareBoardDialog(props: Props): JSX.Element {
 
     const onDeleteBoardMember = (member: BoardMember) => {
         if (member.userId === me?.id && isLastAdmin(Object.values(members))) {
-            sendFlashMessage({content: intl.formatMessage({id: 'shareBoard.lastAdmin', defaultMessage: 'Boards must have at least one Administrator'}), severity: 'low'})
+            sendFlashMessage({content: intl.formatMessage({id: 'shareBoard.lastAdmin', defaultMessage: 'Panoların en az bir Yöneticisi olmalıdır'}), severity: 'low'})
             return
         }
         mutator.deleteBoardMember(member)
@@ -282,14 +282,14 @@ export default function ShareBoardDialog(props: Props): JSX.Element {
     const shareBoardTitle = (
         <FormattedMessage
             id={'ShareBoard.Title'}
-            defaultMessage={'Share Board'}
+            defaultMessage={'Panoyu Paylaş'}
         />
     )
 
     const shareTemplateTitle = (
         <FormattedMessage
             id={'ShareTemplate.Title'}
-            defaultMessage={'Share Template'}
+            defaultMessage={'Şablonu Paylaş'}
         />
     )
 
@@ -314,11 +314,11 @@ export default function ShareBoardDialog(props: Props): JSX.Element {
     let confirmSubtext
     let confirmButtonText
     if (board.channelId === '') {
-        confirmSubtext = intl.formatMessage({id: 'shareBoard.confirm-link-channel-subtext', defaultMessage: 'When you link a channel to a board, all members of the channel (existing and new) will be able to edit it. This excludes members who are guests.'})
-        confirmButtonText = intl.formatMessage({id: 'shareBoard.confirm-link-channel-button', defaultMessage: 'Link channel'})
+        confirmSubtext = intl.formatMessage({id: 'shareBoard.confirm-link-channel-subtext', defaultMessage: 'Bir kanalı bir panoya bağladığınızda, kanalın tüm üyeleri (mevcut ve yeni) onu düzenleyebilecektir. Bu, misafir olan üyeleri kapsamaz.'})
+        confirmButtonText = intl.formatMessage({id: 'shareBoard.confirm-link-channel-button', defaultMessage: 'Kanalı bağla'})
     } else {
-        confirmSubtext = intl.formatMessage({id: 'shareBoard.confirm-link-channel-subtext-with-other-channel', defaultMessage: 'When you link a channel to a board, all members of the channel (existing and new) will be able to edit it. This excludes members who are guests.{lineBreak}This board is currently linked to another channel.\nIt will be unlinked if you choose to link it here.'}, {lineBreak: <p/>})
-        confirmButtonText = intl.formatMessage({id: 'shareBoard.confirm-link-channel-button-with-other-channel', defaultMessage: 'Unlink and link here'})
+        confirmSubtext = intl.formatMessage({id: 'shareBoard.confirm-link-channel-subtext-with-other-channel', defaultMessage: 'Bir kanalı bir panoya bağladığınızda, kanalın tüm üyeleri (mevcut ve yeni) onu düzenleyebilecektir. Bu, misafir olan üyeleri kapsamaz.{lineBreak}Bu pano şu anda başka bir kanala bağlı.\nBurada bağlamayı seçerseniz bağlantısı kesilecektir.'}, {lineBreak: <p/>})
+        confirmButtonText = intl.formatMessage({id: 'shareBoard.confirm-link-channel-button-with-other-channel', defaultMessage: 'Bağlantıyı kes ve buraya bağla'})
     }
 
     return (
@@ -330,7 +330,7 @@ export default function ShareBoardDialog(props: Props): JSX.Element {
             {showLinkChannelConfirmation &&
                 <ConfirmationDialog
                     dialogBox={{
-                        heading: intl.formatMessage({id: 'shareBoard.confirm-link-channel', defaultMessage: 'Link board to channel'}),
+                        heading: intl.formatMessage({id: 'shareBoard.confirm-link-channel', defaultMessage: 'Panoyu kanala bağla'}),
                         subText: confirmSubtext,
                         confirmButtonText,
                         destructive: board.channelId !== '',
@@ -368,7 +368,7 @@ export default function ShareBoardDialog(props: Props): JSX.Element {
                             getOptionValue={(u) => u.id}
                             getOptionLabel={(u: IUser|Channel) => (u as IUser).username || (u as Channel).display_name}
                             isMulti={false}
-                            placeholder={board.isTemplate ? intl.formatMessage({id: 'ShareTemplate.searchPlaceholder', defaultMessage: 'Search for people'}) : intl.formatMessage({id: 'ShareBoard.searchPlaceholder', defaultMessage: 'Search for people and channels'})
+                            placeholder={board.isTemplate ? intl.formatMessage({id: 'ShareTemplate.searchPlaceholder', defaultMessage: 'Kişi ara'}) : intl.formatMessage({id: 'ShareBoard.searchPlaceholder', defaultMessage: 'Kişi ve kanal ara'})
                             }
                             onChange={(newValue) => {
                                 if (newValue && (newValue as IUser).username) {
@@ -414,7 +414,7 @@ export default function ShareBoardDialog(props: Props): JSX.Element {
                     >
                         <FormattedMessage
                             id='share-board.share'
-                            defaultMessage='Share'
+                            defaultMessage='Paylaş'
                         />
                     </button>
                     <BoardPermissionGate permissions={[Permission.ShareBoard]}>
@@ -424,7 +424,7 @@ export default function ShareBoardDialog(props: Props): JSX.Element {
                         >
                             <FormattedMessage
                                 id='share-board.publish'
-                                defaultMessage='Publish'
+                                defaultMessage='Yayınla'
                             />
                         </button>
                     </BoardPermissionGate>
@@ -436,8 +436,8 @@ export default function ShareBoardDialog(props: Props): JSX.Element {
                     <div>
                         <div className='d-flex justify-content-between'>
                             <div className='d-flex flex-column'>
-                                <div className='text-heading2'>{intl.formatMessage({id: 'ShareBoard.PublishTitle', defaultMessage: 'Publish to the web'})}</div>
-                                <div className='text-light'>{intl.formatMessage({id: 'ShareBoard.PublishDescription', defaultMessage: 'Publish and share a read-only link with everyone on the web.'})}</div>
+                                <div className='text-heading2'>{intl.formatMessage({id: 'ShareBoard.PublishTitle', defaultMessage: 'Web\'de yayınla'})}</div>
+                                <div className='text-light'>{intl.formatMessage({id: 'ShareBoard.PublishDescription', defaultMessage: 'Sadece okuma izni olan bir bağlantıyı yayınlayın ve web\'deki herkesle paylaşın.'})}</div>
                             </div>
                             <div>
                                 <Switch
@@ -461,7 +461,7 @@ export default function ShareBoardDialog(props: Props): JSX.Element {
                                     </a>
                                     <Tooltip
                                         key={'regenerateToken'}
-                                        title={intl.formatMessage({id: 'ShareBoard.regenerate', defaultMessage: 'Regenerate token'})}
+                                        title={intl.formatMessage({id: 'ShareBoard.regenerate', defaultMessage: 'Jetonu yeniden oluştur'})}
                                     >
                                         <IconButton
                                             size='small'
@@ -470,14 +470,14 @@ export default function ShareBoardDialog(props: Props): JSX.Element {
                                                 <CompassIcon
                                                     icon='refresh'
                                                 />}
-                                            title={intl.formatMessage({id: 'ShareBoard.regenerate', defaultMessage: 'Regenerate token'})}
+                                            title={intl.formatMessage({id: 'ShareBoard.regenerate', defaultMessage: 'Jetonu yeniden oluştur'})}
                                         />
                                     </Tooltip>
                                 </div>
                                 <Button
                                     emphasis='secondary'
                                     size='medium'
-                                    title='Copy public link'
+                                    title='Herkese açık bağlantıyı kopyala'
                                     icon={
                                         <CompassIcon
                                             icon='content-copy'
@@ -494,12 +494,12 @@ export default function ShareBoardDialog(props: Props): JSX.Element {
                                     {wasCopiedPublic &&
                                         <FormattedMessage
                                             id='ShareBoard.copiedLink'
-                                            defaultMessage='Copied!'
+                                            defaultMessage='Kopyalandı!'
                                         />}
                                     {!wasCopiedPublic &&
                                         <FormattedMessage
                                             id='ShareBoard.copyLink'
-                                            defaultMessage='Copy link'
+                                            defaultMessage='Bağlantıyı kopyala'
                                         />}
                                 </Button>
                             </div>)
@@ -513,8 +513,8 @@ export default function ShareBoardDialog(props: Props): JSX.Element {
                     <div>
                         <div className='d-flex justify-content-between'>
                             <div className='d-flex flex-column'>
-                                <div className='text-heading2'>{intl.formatMessage({id: 'ShareBoard.ShareInternal', defaultMessage: 'Share internally'})}</div>
-                                <div className='text-light'>{intl.formatMessage({id: 'ShareBoard.ShareInternalDescription', defaultMessage: 'Users who have permissions will be able to use this link.'})}</div>
+                                <div className='text-heading2'>{intl.formatMessage({id: 'ShareBoard.ShareInternal', defaultMessage: 'Dahili olarak paylaş'})}</div>
+                                <div className='text-light'>{intl.formatMessage({id: 'ShareBoard.ShareInternalDescription', defaultMessage: 'İzni olan kullanıcılar bu bağlantıyı kullanabilecek.'})}</div>
                             </div>
                         </div>
                     </div>
@@ -532,7 +532,7 @@ export default function ShareBoardDialog(props: Props): JSX.Element {
                         <Button
                             emphasis='secondary'
                             size='medium'
-                            title={intl.formatMessage({id: 'ShareBoard.copyLink', defaultMessage: 'Copy link'})}
+                            title={intl.formatMessage({id: 'ShareBoard.copyLink', defaultMessage: 'Bağlantıyı kopyala'})}
                             onClick={() => {
                                 TelemetryClient.trackEvent(TelemetryCategory, TelemetryActions.ShareLinkInternalCopy, {board: boardId})
                                 Utils.copyTextToClipboard(boardUrl.toString())
@@ -549,12 +549,12 @@ export default function ShareBoardDialog(props: Props): JSX.Element {
                             {wasCopiedInternal &&
                                 <FormattedMessage
                                     id='ShareBoard.copiedLink'
-                                    defaultMessage='Copied!'
+                                    defaultMessage='Kopyalandı!'
                                 />}
                             {!wasCopiedInternal &&
                                 <FormattedMessage
                                     id='ShareBoard.copyLink'
-                                    defaultMessage='Copy link'
+                                    defaultMessage='Bağlantıyı kopyala'
                                 />}
                         </Button>
                     </div>

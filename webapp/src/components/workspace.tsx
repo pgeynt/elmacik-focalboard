@@ -97,13 +97,13 @@ function CenterContent(props: Props) {
             title={
                 <FormattedMessage
                     id='BoardTemplateSelector.plugin.no-content-title'
-                    defaultMessage='Create a board'
+                    defaultMessage='Bir pano oluştur'
                 />
             }
             description={
                 <FormattedMessage
                     id='BoardTemplateSelector.plugin.no-content-description'
-                    defaultMessage='Add a board to the sidebar using any of the templates defined below or start from scratch.'
+                    defaultMessage='Aşağıda tanımlanan şablonlardan herhangi birini kullanarak veya sıfırdan başlayarak kenar çubuğuna bir pano ekleyin.'
                 />
             }
             channelId={match.params.channelId}
@@ -190,7 +190,7 @@ const Workspace = (props: Props) => {
                 <div className='banner'>
                     <FormattedMessage
                         id='Workspace.editing-board-template'
-                        defaultMessage="You're editing a board template."
+                        defaultMessage='Bir pano şablonu düzenliyorsunuz.'
                     />
                 </div>}
                 <CenterContent

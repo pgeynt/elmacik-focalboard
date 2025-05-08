@@ -1,0 +1,66 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Focalboard Geliştirme Rehberi
+
+Focalboard, açık kaynaklı bir proje yönetim aracıdır. Bu rehber, projenin yapısını anlamanıza ve geliştirme yaparken yön bulmanıza yardımcı olacaktır.
+
+## Proje Yapısı
+
+- **webapp/**: Frontend uygulaması (React, TypeScript)
+  - [webapp/src](mdc:webapp/src): Ana kaynak kodları
+  - [webapp/package.json](mdc:webapp/package.json): Frontend bağımlılıkları
+  - [webapp/webpack.common.js](mdc:webapp/webpack.common.js): Webpack yapılandırması
+
+- **server/**: Backend uygulaması (Go)
+  - [server/main](mdc:server/main): Sunucu başlangıç noktası
+  - [server/api](mdc:server/api): API endpoint'leri
+  - [server/model](mdc:server/model): Veri modelleri
+  - [server/services](mdc:server/services): İş mantığı servisleri
+  - [server/go.mod](mdc:server/go.mod): Go bağımlılıkları
+
+- **docker/**: Docker yapılandırması
+  - [docker/Dockerfile](mdc:docker/Dockerfile): Ana Dockerfile
+
+- **Yapılandırma Dosyaları**:
+  - [config.json](mdc:config.json): Ana yapılandırma
+  - [app-config.json](mdc:app-config.json): Uygulama yapılandırması
+  - [server-config.json](mdc:server-config.json): Sunucu yapılandırması
+
+## Geliştirme Ortamı Kurulumu
+
+Geliştirme ortamınızı kurmak için:
+
+1. `.env` dosyası oluşturup `EXCLUDE_ENTERPRISE="1"` değerini ekleyin
+2. Aşağıdaki komutları çalıştırın:
+   ```
+   make prebuild
+   make
+   ```
+3. Sunucuyu başlatmak için: `./bin/focalboard-server`
+4. Tarayıcınızda `http://localhost:8000` adresine gidin
+
+## Web Server Dağıtımı
+
+Docker kullanarak dağıtım yapmak için:
+- `docker build -f docker/Dockerfile .`
+- `docker run -it -p 80:8000 <image_name>`
+
+## Test Etme
+
+Değişikliklerinizi göndermeden önce:
+- Sunucu testleri: `make server-test`
+- Web uygulaması linter: `cd webapp; npm run check`
+- Web uygulaması testleri: `cd webapp; npm run test`
+- Web uygulaması UI testleri: `cd webapp; npm run cypress:ci`
+
+## Faydalı Bağlantılar
+
+- API Dokümantasyonu: [swagger/docs](mdc:server/swagger/docs)
+- CHANGELOG: [CHANGELOG.md](mdc:CHANGELOG.md)
+- Katkıda Bulunma Kılavuzu: [CONTRIBUTING.md](mdc:CONTRIBUTING.md)
+
+
+

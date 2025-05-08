@@ -35,16 +35,16 @@ const UserPermissionsRow = (props: Props): JSX.Element => {
     const board = useAppSelector(getCurrentBoard)
     const {user, member, isMe, teammateNameDisplay} = props
     let currentRole = MemberRole.Viewer
-    let displayRole = intl.formatMessage({id: 'BoardMember.schemeViewer', defaultMessage: 'Viewer'})
+    let displayRole = intl.formatMessage({id: 'BoardMember.schemeViewer', defaultMessage: 'İzleyici'})
     if (member.schemeAdmin) {
         currentRole = MemberRole.Admin
-        displayRole = intl.formatMessage({id: 'BoardMember.schemeAdmin', defaultMessage: 'Admin'})
+        displayRole = intl.formatMessage({id: 'BoardMember.schemeAdmin', defaultMessage: 'Yönetici'})
     } else if (member.schemeEditor || member.minimumRole === MemberRole.Editor) {
         currentRole = MemberRole.Editor
-        displayRole = intl.formatMessage({id: 'BoardMember.schemeEditor', defaultMessage: 'Editor'})
+        displayRole = intl.formatMessage({id: 'BoardMember.schemeEditor', defaultMessage: 'Düzenleyici'})
     } else if (member.schemeCommenter || member.minimumRole === MemberRole.Commenter) {
         currentRole = MemberRole.Commenter
-        displayRole = intl.formatMessage({id: 'BoardMember.schemeCommenter', defaultMessage: 'Commenter'})
+        displayRole = intl.formatMessage({id: 'BoardMember.schemeCommenter', defaultMessage: 'Yorumcu'})
     }
 
     const menuWrapperRef = useRef<HTMLDivElement>(null)
@@ -58,7 +58,7 @@ const UserPermissionsRow = (props: Props): JSX.Element => {
                 <div className='ml-3'>
                     <strong>{Utils.getUserDisplayName(user, teammateNameDisplay)}</strong>
                     <strong className='ml-2 text-light'>{`@${user.username}`}</strong>
-                    {isMe && <strong className='ml-2 text-light'>{intl.formatMessage({id: 'ShareBoard.userPermissionsYouText', defaultMessage: '(You)'})}</strong>}
+                    {isMe && <strong className='ml-2 text-light'>{intl.formatMessage({id: 'ShareBoard.userPermissionsYouText', defaultMessage: '(Siz)'})}</strong>}
                     <GuestBadge show={user.is_guest}/>
                     <AdminBadge permissions={user.permissions}/>
                 </div>
@@ -82,7 +82,7 @@ const UserPermissionsRow = (props: Props): JSX.Element => {
                                     id={MemberRole.Viewer}
                                     check={true}
                                     icon={currentRole === MemberRole.Viewer ? <CheckIcon/> : <div className='empty-icon'/>}
-                                    name={intl.formatMessage({id: 'BoardMember.schemeViewer', defaultMessage: 'Viewer'})}
+                                    name={intl.formatMessage({id: 'BoardMember.schemeViewer', defaultMessage: 'İzleyici'})}
                                     onClick={() => props.onUpdateBoardMember(member, MemberRole.Viewer)}
                                 />}
                             {!board.isTemplate && (board.minimumRole === MemberRole.None || board.minimumRole === MemberRole.Commenter || board.minimumRole === MemberRole.Viewer) &&
@@ -90,14 +90,14 @@ const UserPermissionsRow = (props: Props): JSX.Element => {
                                     id={MemberRole.Commenter}
                                     check={true}
                                     icon={currentRole === MemberRole.Commenter ? <CheckIcon/> : <div className='empty-icon'/>}
-                                    name={intl.formatMessage({id: 'BoardMember.schemeCommenter', defaultMessage: 'Commenter'})}
+                                    name={intl.formatMessage({id: 'BoardMember.schemeCommenter', defaultMessage: 'Yorumcu'})}
                                     onClick={() => props.onUpdateBoardMember(member, MemberRole.Commenter)}
                                 />}
                             <Menu.Text
                                 id={MemberRole.Editor}
                                 check={true}
                                 icon={currentRole === MemberRole.Editor ? <CheckIcon/> : <div className='empty-icon'/>}
-                                name={intl.formatMessage({id: 'BoardMember.schemeEditor', defaultMessage: 'Editor'})}
+                                name={intl.formatMessage({id: 'BoardMember.schemeEditor', defaultMessage: 'Düzenleyici'})}
                                 onClick={() => props.onUpdateBoardMember(member, MemberRole.Editor)}
                             />
                             {user.is_guest !== true &&
@@ -105,13 +105,13 @@ const UserPermissionsRow = (props: Props): JSX.Element => {
                                     id={MemberRole.Admin}
                                     check={true}
                                     icon={currentRole === MemberRole.Admin ? <CheckIcon/> : <div className='empty-icon'/>}
-                                    name={intl.formatMessage({id: 'BoardMember.schemeAdmin', defaultMessage: 'Admin'})}
+                                    name={intl.formatMessage({id: 'BoardMember.schemeAdmin', defaultMessage: 'Yönetici'})}
                                     onClick={() => props.onUpdateBoardMember(member, MemberRole.Admin)}
                                 />}
                             <Menu.Separator/>
                             <Menu.Text
                                 id='Remove'
-                                name={intl.formatMessage({id: 'ShareBoard.userPermissionsRemoveMemberText', defaultMessage: 'Remove member'})}
+                                name={intl.formatMessage({id: 'ShareBoard.userPermissionsRemoveMemberText', defaultMessage: 'Üyeyi kaldır'})}
                                 onClick={() => props.onDeleteBoardMember(member)}
                             />
                         </Menu>

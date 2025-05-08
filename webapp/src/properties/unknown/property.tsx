@@ -9,5 +9,5 @@ export default class UnkownProperty extends PropertyType {
     Editor = Text
     name = 'Text'
     type = 'unknown' as PropertyTypeEnum
-    displayName = (intl: IntlShape) => intl.formatMessage({id: 'PropertyType.Unknown', defaultMessage: 'Unknown'})
+    displayName = (intl: IntlShape) => intl.formatMessage({id: 'PropertyType.Unknown', defaultMessage: 'Bilinmeyen'})
 }

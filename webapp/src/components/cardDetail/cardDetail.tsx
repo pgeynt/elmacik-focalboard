@@ -70,7 +70,7 @@ async function addBlockNewEditor(card: Card, intl: IntlShape, title: string, fie
     block.type = contentType
     block.fields = {...block.fields, ...fields}
 
-    const description = intl.formatMessage({id: 'CardDetail.addCardText', defaultMessage: 'add card text'})
+    const description = intl.formatMessage({id: 'CardDetail.addCardText', defaultMessage: 'kart metni ekle'})
 
     const afterRedo = async (newBlock: Block) => {
         const contentOrder = card.fields.contentOrder.slice()
@@ -215,7 +215,7 @@ const CardDetail = (props: Props): JSX.Element|null => {
                         >
                             <FormattedMessage
                                 id='CardDetail.add-icon'
-                                defaultMessage='Add icon'
+                                defaultMessage='İkon ekle'
                             />
                         </Button>
                     </div>}
@@ -224,7 +224,7 @@ const CardDetail = (props: Props): JSX.Element|null => {
                     ref={titleRef}
                     className='title'
                     value={title}
-                    placeholderText='Untitled'
+                    placeholderText='Başlıksız'
                     onChange={(newTitle: string) => setTitle(newTitle)}
                     saveOnEsc={true}
                     onSave={saveTitle}
@@ -242,13 +242,13 @@ const CardDetail = (props: Props): JSX.Element|null => {
                     <p className='CardDetail__limited-title'>
                         <FormattedMessage
                             id='CardDetail.limited-title'
-                            defaultMessage='This card is hidden'
+                            defaultMessage='Bu kart gizlenmiş'
                         />
                     </p>
                     <p className='CardDetail__limited-body'>
                         <FormattedMessage
                             id='CardDetail.limited-body'
-                            defaultMessage='Upgrade to our Professional or Enterprise plan to view archived cards, have unlimited views per boards, unlimited cards and more.'
+                            defaultMessage='Arşivlenmiş kartları görüntülemek, pano başına sınırsız görünüme, sınırsız karta ve daha fazlasına sahip olmak için Profesyonel veya Kurumsal planımıza yükseltin.'
                         />
                         <br/>
                         <a
@@ -261,7 +261,7 @@ const CardDetail = (props: Props): JSX.Element|null => {
                         >
                             <FormattedMessage
                                 id='CardDetial.limited-link'
-                                defaultMessage='Learn more about our plans.'
+                                defaultMessage='Planlarımız hakkında daha fazla bilgi edinin.'
                             />
                         </a>
                     </p>
@@ -274,7 +274,7 @@ const CardDetail = (props: Props): JSX.Element|null => {
                         emphasis='primary'
                         size='large'
                     >
-                        {intl.formatMessage({id: 'CardDetail.limited-button', defaultMessage: 'Upgrade'})}
+                        {intl.formatMessage({id: 'CardDetail.limited-button', defaultMessage: 'Yükselt'})}
                     </Button>
                 </div>}
 
@@ -341,7 +341,7 @@ const CardDetail = (props: Props): JSX.Element|null => {
                             }
 
                             if (block.contentType === 'text' && block.value === '') {
-                                const description = intl.formatMessage({id: 'ContentBlock.DeleteAction', defaultMessage: 'delete'})
+                                const description = intl.formatMessage({id: 'ContentBlock.DeleteAction', defaultMessage: 'sil'})
 
                                 mutator.deleteBlock(originalContentBlock, description)
                                 return null
@@ -355,7 +355,7 @@ const CardDetail = (props: Props): JSX.Element|null => {
                                 newBlock.title = block.value.value
                                 newBlock.fields = {...newBlock.fields, value: block.value.checked}
                             }
-                            mutator.updateBlock(card.boardId, newBlock, originalContentBlock, intl.formatMessage({id: 'ContentBlock.editCardText', defaultMessage: 'edit card content'}))
+                            mutator.updateBlock(card.boardId, newBlock, originalContentBlock, intl.formatMessage({id: 'ContentBlock.editCardText', defaultMessage: 'kart içeriğini düzenle'}))
                             return block
                         }}
                         onBlockMoved={async (block: BlockData, beforeBlock: BlockData|null, afterBlock: BlockData|null): Promise<void> => {
@@ -375,11 +375,11 @@ const CardDetail = (props: Props): JSX.Element|null => {
                                     sourceWhere = 'after'
                                 }
                                 if (afterBlock && afterBlock.id) {
-                                    await mutator.moveContentBlock(block.id, afterBlock.id, 'after', sourceBlockId, sourceWhere, intl.formatMessage({id: 'ContentBlock.moveBlock', defaultMessage: 'move card content'}))
+                                    await mutator.moveContentBlock(block.id, afterBlock.id, 'after', sourceBlockId, sourceWhere, intl.formatMessage({id: 'ContentBlock.moveBlock', defaultMessage: 'kart içeriğini taşı'}))
                                     return
                                 }
                                 if (beforeBlock && beforeBlock.id) {
-                                    await mutator.moveContentBlock(block.id, beforeBlock.id, 'before', sourceBlockId, sourceWhere, intl.formatMessage({id: 'ContentBlock.moveBlock', defaultMessage: 'move card content'}))
+                                    await mutator.moveContentBlock(block.id, beforeBlock.id, 'before', sourceBlockId, sourceWhere, intl.formatMessage({id: 'ContentBlock.moveBlock', defaultMessage: 'kart içeriğini taşı'}))
                                 }
                             }
                         }}

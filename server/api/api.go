@@ -6,12 +6,14 @@ import (
 	"fmt"
 	"net/http"
 	"runtime/debug"
+	"sync"
 
 	"github.com/gorilla/mux"
 	"github.com/mattermost/focalboard/server/app"
 	"github.com/mattermost/focalboard/server/model"
 	"github.com/mattermost/focalboard/server/services/audit"
 	"github.com/mattermost/focalboard/server/services/permissions"
+	"github.com/mattermost/focalboard/server/services/store"
 
 	"github.com/mattermost/mattermost/server/public/shared/mlog"
 )
@@ -41,6 +43,11 @@ type API struct {
 	MattermostAuth  bool
 	logger          mlog.LoggerIFace
 	audit           *audit.Audit
+	store           store.Store
+	mu              sync.RWMutex
+	baseURL         string
+	defaultServerRoute string
+	servicesAPI     model.ServicesAPI
 }
 
 func NewAPI(
@@ -50,6 +57,10 @@ func NewAPI(
 	permissions permissions.PermissionsService,
 	logger mlog.LoggerIFace,
 	audit *audit.Audit,
+	store store.Store,
+	baseURL string,
+	defaultServerRoute string,
+	servicesAPI model.ServicesAPI,
 ) *API {
 	return &API{
 		app:             app,
@@ -58,6 +69,10 @@ func NewAPI(
 		permissions:     permissions,
 		logger:          logger,
 		audit:           audit,
+		store:           store,
+		baseURL:         baseURL,
+		defaultServerRoute: defaultServerRoute,
+		servicesAPI:     servicesAPI,
 	}
 }
 
@@ -93,6 +108,7 @@ func (a *API) RegisterRoutes(r *mux.Router) {
 	a.registerContentBlocksRoutes(apiv2)
 	a.registerStatisticsRoutes(apiv2)
 	a.registerComplianceRoutes(apiv2)
+	a.registerNotificationsRoutes(apiv2)
 
 	// V3 routes
 	a.registerCardsRoutes(apiv2)

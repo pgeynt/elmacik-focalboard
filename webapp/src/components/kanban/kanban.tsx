@@ -86,7 +86,7 @@ const Kanban = (props: Props) => {
 
         const option: IPropertyOption = {
             id: Utils.createGuid(IDType.BlockID),
-            value: 'New group',
+            value: 'Yeni grup',
             color: 'propColorDefault',
         }
 
@@ -253,7 +253,7 @@ const Kanban = (props: Props) => {
                     <div className='octo-board-header-cell narrow'>
                         <FormattedMessage
                             id='BoardComponent.hidden-columns'
-                            defaultMessage='Hidden columns'
+                            defaultMessage='Gizli sütunlar'
                         />
                     </div>
                 }
@@ -266,7 +266,7 @@ const Kanban = (props: Props) => {
                             >
                                 <FormattedMessage
                                     id='BoardComponent.add-a-group'
-                                    defaultMessage='+ Add a group'
+                                    defaultMessage='+ Grup ekle'
                                 />
                             </Button>
                         </div>
@@ -315,7 +315,7 @@ const Kanban = (props: Props) => {
                                 >
                                     <FormattedMessage
                                         id='BoardComponent.new'
-                                        defaultMessage='+ New'
+                                        defaultMessage='+ Yeni'
                                     />
                                 </Button>
                             </BoardPermissionGate>

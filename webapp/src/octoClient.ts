@@ -19,6 +19,19 @@ import {BoardsCloudLimits} from './boardsCloudLimits'
 import {TopBoardResponse} from './insights'
 import {BoardSiteStatistics} from './statistics'
 
+// Notification tipi tanımlıyoruz
+export interface Notification {
+    id: string
+    userID: string
+    message: string
+    from: string
+    createAt: number
+    read: boolean
+    link?: string
+    boardID?: string
+    cardID?: string
+}
+
 //
 // OctoClient is the client interface to the server APIs
 //
@@ -1082,6 +1095,89 @@ class OctoClient {
             method: 'PUT',
             headers: this.headers(),
         })
+    }
+
+    // GET /api/v2/notifications
+    async getNotifications(params: {limit?: number, offset?: number} = {}): Promise<{success: boolean, data?: Notification[], error?: string}> {
+        const queryParams = new URLSearchParams()
+        if (params.limit) queryParams.append('limit', params.limit.toString())
+        if (params.offset) queryParams.append('offset', params.offset.toString())
+        
+        const path = `/api/v2/notifications${queryParams.toString() ? `?${queryParams.toString()}` : ''}`
+        
+        const response = await fetch(this.getBaseURL() + path, {
+            headers: this.headers(),
+        })
+        
+        if (response.status !== 200) {
+            const errorJson = await this.getJson(response, {error: 'Unknown error'})
+            return {success: false, error: errorJson.error}
+        }
+        
+        const data = await this.getJson<Notification[]>(response, [])
+        return {success: true, data}
+    }
+
+    // GET /api/v2/notifications/unread_count
+    async getUnreadNotificationsCount(): Promise<{success: boolean, count?: number, error?: string}> {
+        const response = await fetch(this.getBaseURL() + '/api/v2/notifications/unread_count', {
+            headers: this.headers(),
+        })
+        
+        if (response.status !== 200) {
+            const errorJson = await this.getJson(response, {error: 'Unknown error'})
+            return {success: false, error: errorJson.error}
+        }
+        
+        const data = await this.getJson<{count: number}>(response, {count: 0})
+        return {success: true, count: data.count}
+    }
+
+    // PUT /api/v2/notifications/{notificationID}/read
+    async markNotificationAsRead(notificationID: string): Promise<{success: boolean, error?: string}> {
+        const response = await fetch(this.getBaseURL() + `/api/v2/notifications/${notificationID}/read`, {
+            method: 'PUT',
+            headers: this.headers(),
+            body: JSON.stringify({}),
+        })
+        
+        if (response.status !== 200) {
+            const errorJson = await this.getJson(response, {error: 'Unknown error'})
+            return {success: false, error: errorJson.error}
+        }
+        
+        return {success: true}
+    }
+
+    // PUT /api/v2/notifications/mark_all_as_read
+    async markAllNotificationsAsRead(): Promise<{success: boolean, error?: string}> {
+        const response = await fetch(this.getBaseURL() + '/api/v2/notifications/mark_all_as_read', {
+            method: 'PUT',
+            headers: this.headers(),
+            body: JSON.stringify({}),
+        })
+        
+        if (response.status !== 200) {
+            const errorJson = await this.getJson(response, {error: 'Unknown error'})
+            return {success: false, error: errorJson.error}
+        }
+        
+        return {success: true}
+    }
+
+    // DELETE /api/v2/notifications/{notificationID}
+    async deleteNotification(notificationID: string): Promise<{success: boolean, error?: string}> {
+        const response = await fetch(this.getBaseURL() + `/api/v2/notifications/${notificationID}`, {
+            method: 'DELETE',
+            headers: this.headers(),
+        })
+        
+        if (response.status !== 200) {
+            const errorJson = await this.getJson(response, {error: 'Unknown error'})
+            return {success: false, error: errorJson.error}
+        }
+        
+        return {success: true}
     }
 }
 

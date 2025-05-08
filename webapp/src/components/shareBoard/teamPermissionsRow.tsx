@@ -46,22 +46,22 @@ const TeamPermissionsRow = (): JSX.Element => {
         }
     }
 
-    let currentRoleName = intl.formatMessage({id: 'BoardMember.schemeAdmin', defaultMessage: 'Admin'})
+    let currentRoleName = intl.formatMessage({id: 'BoardMember.schemeAdmin', defaultMessage: 'Yönetici'})
     if (board.type === BoardTypeOpen) {
-        currentRoleName = intl.formatMessage({id: 'BoardMember.schemeEditor', defaultMessage: 'Editor'})
+        currentRoleName = intl.formatMessage({id: 'BoardMember.schemeEditor', defaultMessage: 'Düzenleyici'})
         if (board.minimumRole === MemberRole.Editor) {
             if (board.isTemplate) {
-                currentRoleName = intl.formatMessage({id: 'BoardMember.schemeViewer', defaultMessage: 'Viewer'})
+                currentRoleName = intl.formatMessage({id: 'BoardMember.schemeViewer', defaultMessage: 'İzleyici'})
             } else {
-                currentRoleName = intl.formatMessage({id: 'BoardMember.schemeEditor', defaultMessage: 'Editor'})
+                currentRoleName = intl.formatMessage({id: 'BoardMember.schemeEditor', defaultMessage: 'Düzenleyici'})
             }
         } else if (board.minimumRole === MemberRole.Commenter) {
-            currentRoleName = intl.formatMessage({id: 'BoardMember.schemeCommenter', defaultMessage: 'Commenter'})
+            currentRoleName = intl.formatMessage({id: 'BoardMember.schemeCommenter', defaultMessage: 'Yorumcu'})
         } else if (board.minimumRole === MemberRole.Viewer) {
-            currentRoleName = intl.formatMessage({id: 'BoardMember.schemeViewer', defaultMessage: 'Viewer'})
+            currentRoleName = intl.formatMessage({id: 'BoardMember.schemeViewer', defaultMessage: 'İzleyici'})
         }
     } else {
-        currentRoleName = intl.formatMessage({id: 'BoardMember.schemeNone', defaultMessage: 'None'})
+        currentRoleName = intl.formatMessage({id: 'BoardMember.schemeNone', defaultMessage: 'Hiçbiri'})
     }
 
     const confirmationDialog = (
@@ -69,18 +69,18 @@ const TeamPermissionsRow = (): JSX.Element => {
             dialogBox={{
                 heading: intl.formatMessage({
                     id: 'shareBoard.confirm-change-team-role.title',
-                    defaultMessage: 'Change minimum board role',
+                    defaultMessage: 'Minimum pano rolünü değiştir',
                 }),
                 subText: intl.formatMessage({
                     id: 'shareBoard.confirm-change-team-role.body',
-                    defaultMessage: 'Everyone on this board with a lower permission than the "{role}" role will <b>now be promoted to {role}</b>. Are you sure you want to change the minimum role for the board?',
+                    defaultMessage: 'Bu panodaki "{role}" rolünden daha düşük izne sahip herkes <b>şimdi {role} rolüne yükseltilecek</b>. Pano için minimum rolü değiştirmek istediğinizden emin misiniz?',
                 }, {
                     b: (...chunks) => <b>{chunks}</b>,
-                    role: changeRoleConfirmation === MemberRole.Editor ? intl.formatMessage({id: 'BoardMember.schemeEditor', defaultMessage: 'Editor'}) : intl.formatMessage({id: 'BoardMember.schemeCommenter', defaultMessage: 'Commenter'}),
+                    role: changeRoleConfirmation === MemberRole.Editor ? intl.formatMessage({id: 'BoardMember.schemeEditor', defaultMessage: 'Düzenleyici'}) : intl.formatMessage({id: 'BoardMember.schemeCommenter', defaultMessage: 'Yorumcu'}),
                 }),
                 confirmButtonText: intl.formatMessage({
                     id: 'shareBoard.confirm-change-team-role.confirmBtnText',
-                    defaultMessage: 'Change minimum board role',
+                    defaultMessage: 'Minimum pano rolünü değiştir',
                 }),
                 onConfirm: onChangeRole,
                 onClose: () => setChangeRoleConfirmation(null),
@@ -92,7 +92,7 @@ const TeamPermissionsRow = (): JSX.Element => {
         <div className='user-item'>
             {changeRoleConfirmation && confirmationDialog}
             <div className='user-item__content'>
-                <div className='ml-3'><strong>{intl.formatMessage({id: 'ShareBoard.teamPermissionsText', defaultMessage: 'Everyone at {teamName} Team'}, {teamName: team?.title})}</strong></div>
+                <div className='ml-3'><strong>{intl.formatMessage({id: 'ShareBoard.teamPermissionsText', defaultMessage: '{teamName} Takımındaki Herkes'}, {teamName: team?.title})}</strong></div>
             </div>
             <div>
                 <BoardPermissionGate permissions={[Permission.ManageBoardType]}>
@@ -110,7 +110,7 @@ const TeamPermissionsRow = (): JSX.Element => {
                                     id={MemberRole.Editor}
                                     check={board.minimumRole === undefined || board.minimumRole === MemberRole.Editor}
                                     icon={board.type === BoardTypeOpen && board.minimumRole === MemberRole.Editor ? <CheckIcon/> : <div className='empty-icon'/>}
-                                    name={intl.formatMessage({id: 'BoardMember.schemeEditor', defaultMessage: 'Editor'})}
+                                    name={intl.formatMessage({id: 'BoardMember.schemeEditor', defaultMessage: 'Düzenleyici'})}
                                     onClick={() => setChangeRoleConfirmation(MemberRole.Editor)}
                                 />}
                             {!board.isTemplate &&
@@ -118,21 +118,21 @@ const TeamPermissionsRow = (): JSX.Element => {
                                     id={MemberRole.Commenter}
                                     check={board.minimumRole === MemberRole.Commenter}
                                     icon={board.type === BoardTypeOpen && board.minimumRole === MemberRole.Commenter ? <CheckIcon/> : <div className='empty-icon'/>}
-                                    name={intl.formatMessage({id: 'BoardMember.schemeCommenter', defaultMessage: 'Commenter'})}
+                                    name={intl.formatMessage({id: 'BoardMember.schemeCommenter', defaultMessage: 'Yorumcu'})}
                                     onClick={() => setChangeRoleConfirmation(MemberRole.Commenter)}
                                 />}
                             <Menu.Text
                                 id={MemberRole.Viewer}
                                 check={board.minimumRole === MemberRole.Viewer}
                                 icon={board.type === BoardTypeOpen && board.minimumRole === MemberRole.Viewer ? <CheckIcon/> : <div className='empty-icon'/>}
-                                name={intl.formatMessage({id: 'BoardMember.schemeViewer', defaultMessage: 'Viewer'})}
+                                name={intl.formatMessage({id: 'BoardMember.schemeViewer', defaultMessage: 'İzleyici'})}
                                 onClick={() => updateBoardType(board, BoardTypeOpen, MemberRole.Viewer)}
                             />
                             <Menu.Text
                                 id={MemberRole.None}
                                 check={true}
                                 icon={board.type === BoardTypePrivate ? <CheckIcon/> : <div className='empty-icon'/>}
-                                name={intl.formatMessage({id: 'BoardMember.schemeNone', defaultMessage: 'None'})}
+                                name={intl.formatMessage({id: 'BoardMember.schemeNone', defaultMessage: 'Hiçbiri'})}
                                 onClick={() => updateBoardType(board, BoardTypePrivate, MemberRole.None)}
                             />
                         </Menu>

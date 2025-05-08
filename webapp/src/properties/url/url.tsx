@@ -29,7 +29,7 @@ const URLProperty = (props: PropertyProps): JSX.Element => {
     const editableRef = useRef<Focusable>(null)
     const intl = useIntl()
 
-    const emptyDisplayValue = props.showEmptyPlaceholder ? intl.formatMessage({id: 'PropertyValueElement.empty', defaultMessage: 'Empty'}) : ''
+    const emptyDisplayValue = props.showEmptyPlaceholder ? intl.formatMessage({id: 'PropertyValueElement.empty', defaultMessage: 'Boş'}) : ''
 
     const saveTextProperty = useCallback(() => {
         if (value !== (props.card.fields.properties[props.propertyTemplate?.id || ''] || '')) {

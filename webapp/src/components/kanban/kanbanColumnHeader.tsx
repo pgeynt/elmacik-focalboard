@@ -98,12 +98,12 @@ export default function KanbanColumnHeader(props: Props): JSX.Element {
                 <Label
                     title={intl.formatMessage({
                         id: 'BoardComponent.no-property-title',
-                        defaultMessage: 'Items with an empty {property} property will go here. This column cannot be removed.',
+                        defaultMessage: '{property} özelliği boş olan öğeler buraya gelecek. Bu sütun kaldırılamaz.',
                     }, {property: groupByProperty!.name})}
                 >
                     <FormattedMessage
                         id='BoardComponent.no-property'
-                        defaultMessage='No {property}'
+                        defaultMessage='{property} yok'
                         values={{
                             property: groupByProperty!.name,
                         }}
@@ -117,7 +117,7 @@ export default function KanbanColumnHeader(props: Props): JSX.Element {
                 <Label color={group.option.color}>
                     <Editable
                         value={groupTitle}
-                        placeholderText='New Select'
+                        placeholderText='Yeni Seçim'
                         onChange={setGroupTitle}
                         onSave={() => {
                             if (groupTitle.trim() === '') {
@@ -167,7 +167,7 @@ export default function KanbanColumnHeader(props: Props): JSX.Element {
                                 <Menu.Text
                                     id='hide'
                                     icon={<HideIcon/>}
-                                    name={intl.formatMessage({id: 'BoardComponent.hide', defaultMessage: 'Hide'})}
+                                    name={intl.formatMessage({id: 'BoardComponent.hide', defaultMessage: 'Gizle'})}
                                     onClick={() => mutator.hideViewColumn(board.id, activeView, group.option.id || '')}
                                 />
                                 {canEditOption &&
@@ -175,7 +175,7 @@ export default function KanbanColumnHeader(props: Props): JSX.Element {
                                         <Menu.Text
                                             id='delete'
                                             icon={<DeleteIcon/>}
-                                            name={intl.formatMessage({id: 'BoardComponent.delete', defaultMessage: 'Delete'})}
+                                            name={intl.formatMessage({id: 'BoardComponent.delete', defaultMessage: 'Sil'})}
                                             onClick={() => mutator.deletePropertyOption(board.id, board.cardProperties, groupByProperty!, group.option)}
                                         />
                                         <Menu.Separator/>

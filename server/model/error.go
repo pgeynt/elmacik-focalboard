@@ -1,3 +1,6 @@
+// Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
+// See LICENSE.txt for license information.
+
 package model
 
 import (
@@ -70,7 +73,7 @@ type ErrBadRequest struct {
 	reason string
 }
 
-// NewErrNotFound creates a new ErrNotFound instance.
+// NewErrBadRequest creates a new ErrBadRequest instance.
 func NewErrBadRequest(reason string) *ErrBadRequest {
 	return &ErrBadRequest{
 		reason: reason,
@@ -130,6 +133,22 @@ func NewErrForbidden(reason string) *ErrForbidden {
 
 func (br *ErrForbidden) Error() string {
 	return br.reason
+}
+
+// ErrInternalServer can be returned when an internal server error occurs.
+type ErrInternalServer struct {
+	reason string
+}
+
+// NewErrInternalServer creates a new ErrInternalServer instance.
+func NewErrInternalServer(reason string) *ErrInternalServer {
+	return &ErrInternalServer{
+		reason: reason,
+	}
+}
+
+func (is *ErrInternalServer) Error() string {
+	return is.reason
 }
 
 type ErrInvalidCategory struct {
@@ -327,4 +346,15 @@ func IsErrNotImplemented(err error) bool {
 
 	// check if this is a model.ErrInsufficientLicense
 	return errors.Is(err, ErrInsufficientLicense)
+}
+
+// IsErrInternalServer returns true if `err` is or wraps a model.ErrInternalServer.
+func IsErrInternalServer(err error) bool {
+	if err == nil {
+		return false
+	}
+
+	// check if this is a model.ErrInternalServer
+	var eis *ErrInternalServer
+	return errors.As(err, &eis)
 }

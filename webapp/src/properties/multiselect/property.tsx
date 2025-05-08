@@ -14,9 +14,10 @@ export default class MultiSelectProperty extends PropertyType {
     Editor = MultiSelect
     name = 'MultiSelect'
     type = 'multiSelect' as PropertyTypeEnum
+    displayName = (intl: IntlShape) => intl.formatMessage({id: 'PropertyType.MultiSelect', defaultMessage: 'Çoklu seçim'})
+    canGroup = true
     canFilter = true
     filterValueType = 'options' as FilterValueType
-    displayName = (intl: IntlShape) => intl.formatMessage({id: 'PropertyType.MultiSelect', defaultMessage: 'Multi select'})
     displayValue = (propertyValue: string | string[] | undefined, card: Card, propertyTemplate: IPropertyTemplate) => {
         if (propertyValue?.length) {
             const options = propertyTemplate.options.filter((o) => propertyValue.includes(o.id))

@@ -55,8 +55,8 @@ const KanbanCard = (props: Props) => {
 
     const confirmDialogProps: ConfirmationDialogBoxProps = useMemo(() => {
         return {
-            heading: intl.formatMessage({id: 'CardDialog.delete-confirmation-dialog-heading', defaultMessage: 'Confirm card delete!'}),
-            confirmButtonText: intl.formatMessage({id: 'CardDialog.delete-confirmation-dialog-button-text', defaultMessage: 'Delete'}),
+            heading: intl.formatMessage({id: 'CardDialog.delete-confirmation-dialog-heading', defaultMessage: 'Kart silmeyi onayla!'}),
+            confirmButtonText: intl.formatMessage({id: 'CardDialog.delete-confirmation-dialog-button-text', defaultMessage: 'Sil'}),
             onConfirm: handleDeleteCard,
             onClose: () => {
                 setShowConfirmationDialogBox(false)
@@ -127,7 +127,7 @@ const KanbanCard = (props: Props) => {
                         key='__title'
                         className='octo-titletext'
                     >
-                        {card.title || intl.formatMessage({id: 'KanbanCard.untitled', defaultMessage: 'Untitled'})}
+                        {card.title || intl.formatMessage({id: 'KanbanCard.untitled', defaultMessage: 'Başlıksız'})}
                     </div>
                 </div>
                 {visiblePropertyTemplates.map((template) => (

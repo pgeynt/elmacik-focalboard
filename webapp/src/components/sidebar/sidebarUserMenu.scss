@@ -1,8 +1,17 @@
 .SidebarUserMenu {
+    margin-bottom: 12px;
+
     .logo {
         display: flex;
         flex-direction: row;
         align-items: center;
+        padding: 8px 12px;
+        border-radius: 8px;
+        transition: background-color 0.2s ease;
+        
+        &:hover {
+            background-color: rgba(var(--sidebar-text-rgb), 0.04);
+        }
 
         .logo-title {
             font-family: Metropolis, sans-serif;
@@ -11,15 +20,34 @@
             font-size: 16px;
             margin-right: 5px;
             cursor: pointer;
+            transition: transform 0.2s ease;
+            
+            &:hover {
+                transform: scale(1.02);
+            }
+
+            .logo-img {
+                width: 70px;
+                height: 70px;
+                margin-right: 12px;
+                object-fit: contain;
+                border-radius: 8px;
+                filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.1));
+            }
 
             .FocalboardLogoIcon {
                 fill: rgba(var(--sidebar-text-rgb), 1);
                 color: rgba(var(--sidebar-text-rgb), 1);
-                height: 24px;
-                width: 22px;
-                margin-right: 3px;
+                height: 32px;
+                width: 32px;
+                margin-right: 8px;
                 position: relative;
                 bottom: 2px;
+                transition: transform 0.3s ease;
+                
+                &:hover {
+                    transform: scale(1.1);
+                }
             }
 
             span {
@@ -46,6 +74,24 @@
             line-height: 11px;
             font-weight: 500;
             color: rgba(var(--sidebar-text-rgb), 0.8);
+        }
+    }
+    
+    .MenuWrapper {
+        margin: 0 6px;
+    }
+    
+    .Menu {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        
+        .MenuOption {
+            transition: background-color 0.2s ease;
+            
+            &:hover {
+                background-color: rgba(var(--sidebar-text-rgb), 0.06);
+            }
         }
     }
 }

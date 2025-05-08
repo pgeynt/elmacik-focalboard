@@ -11,6 +11,7 @@ import store from '../../store'
 import {useAppSelector} from '../../store/hooks'
 import {getLanguage} from '../../store/language'
 import {getMessages} from '../../i18n'
+import NotificationButton from '../notifications/notificationButton'
 
 import {Constants} from '../../constants'
 
@@ -33,6 +34,7 @@ const HeaderItems = (props: HeaderItemProps) => {
         >
             <div className='GlobalHeaderComponent'>
                 <span className='spacer'/>
+                <NotificationButton />
                 <a
                     href={helpUrl}
                     target='_blank'

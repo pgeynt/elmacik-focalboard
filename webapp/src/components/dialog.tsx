@@ -28,7 +28,7 @@ const Dialog = (props: Props) => {
 
     const closeDialogText = intl.formatMessage({
         id: 'Dialog.closeDialog',
-        defaultMessage: 'Close dialog',
+        defaultMessage: 'Diyalogu kapat',
     })
 
     useHotkeys('esc', () => props.onClose())

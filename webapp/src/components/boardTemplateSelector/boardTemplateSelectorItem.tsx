@@ -41,7 +41,7 @@ const BoardTemplateSelectorItem = (props: Props) => {
             onClick={onClickHandler}
         >
             <span className='template-icon'>{template.icon || <CompassIcon icon='product-boards'/>}</span>
-            <span className='template-name'>{template.title || intl.formatMessage({id: 'View.NewTemplateTitle', defaultMessage: 'Untitled'})}</span>
+            <span className='template-name'>{template.title || intl.formatMessage({id: 'View.NewTemplateTitle', defaultMessage: 'Başlıksız'})}</span>
 
             {/* don't show template menu options for default templates */}
             {template.createdBy !== Constants.SystemUserID &&
@@ -53,7 +53,7 @@ const BoardTemplateSelectorItem = (props: Props) => {
                     >
                         <IconButton
                             icon={<DeleteIcon/>}
-                            title={intl.formatMessage({id: 'BoardTemplateSelector.delete-template', defaultMessage: 'Delete'})}
+                            title={intl.formatMessage({id: 'BoardTemplateSelector.delete-template', defaultMessage: 'Sil'})}
                             onClick={(e: React.MouseEvent) => {
                                 e.stopPropagation()
                                 setDeleteOpen(true)
@@ -67,7 +67,7 @@ const BoardTemplateSelectorItem = (props: Props) => {
                     >
                         <IconButton
                             icon={<EditIcon/>}
-                            title={intl.formatMessage({id: 'BoardTemplateSelector.edit-template', defaultMessage: 'Edit'})}
+                            title={intl.formatMessage({id: 'BoardTemplateSelector.edit-template', defaultMessage: 'Düzenle'})}
                             onClick={onEditHandler}
                         />
                     </BoardPermissionGate>

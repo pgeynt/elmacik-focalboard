@@ -142,8 +142,8 @@ const CalendarFullView = (props: Props): JSX.Element|null => {
 
     const confirmDialogProps: ConfirmationDialogBoxProps = useMemo(() => {
         return {
-            heading: intl.formatMessage({id: 'CardDialog.delete-confirmation-dialog-heading', defaultMessage: 'Confirm card delete!'}),
-            confirmButtonText: intl.formatMessage({id: 'CardDialog.delete-confirmation-dialog-button-text', defaultMessage: 'Delete'}),
+            heading: intl.formatMessage({id: 'CardDialog.delete-confirmation-dialog-heading', defaultMessage: 'Kart silmeyi onaylayın!'}),
+            confirmButtonText: intl.formatMessage({id: 'CardDialog.delete-confirmation-dialog-button-text', defaultMessage: 'Sil'}),
             onConfirm: handleDeleteCard,
             onClose: () => {
                 setShowConfirmationDialogBox(false)
@@ -182,7 +182,7 @@ const CalendarFullView = (props: Props): JSX.Element|null => {
                         <div
                             className='fc-event-title'
                             key='__title'
-                        >{event.title || intl.formatMessage({id: 'CalendarCard.untitled', defaultMessage: 'Untitled'})}</div>
+                        >{event.title || intl.formatMessage({id: 'CalendarCard.untitled', defaultMessage: 'Başlıksız'})}</div>
                     </div>
                     {visiblePropertyTemplates.map((template) => (
                         <Tooltip
@@ -249,9 +249,9 @@ const CalendarFullView = (props: Props): JSX.Element|null => {
     }), [])
 
     const buttonText = useMemo(() => ({
-        today: intl.formatMessage({id: 'calendar.today', defaultMessage: 'TODAY'}),
-        month: intl.formatMessage({id: 'calendar.month', defaultMessage: 'Month'}),
-        week: intl.formatMessage({id: 'calendar.week', defaultMessage: 'Week'}),
+        today: intl.formatMessage({id: 'calendar.today', defaultMessage: 'BUGÜN'}),
+        month: intl.formatMessage({id: 'calendar.month', defaultMessage: 'Ay'}),
+        week: intl.formatMessage({id: 'calendar.week', defaultMessage: 'Hafta'}),
     }), [])
 
     const dayCellContent = useCallback((args: DayCellContentArg): JSX.Element|null => {
@@ -291,6 +291,7 @@ const CalendarFullView = (props: Props): JSX.Element|null => {
                 selectable={isSelectable}
                 selectMirror={true}
                 select={onNewEvent}
+                locale='tr'
             />
             {showConfirmationDialogBox && <ConfirmationDialogBox dialogBox={confirmDialogProps}/>}
         </div>

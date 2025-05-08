@@ -11,7 +11,7 @@ export default class CreatedByProperty extends PropertyType {
     name = 'Created By'
     type = 'createdBy' as PropertyTypeEnum
     isReadOnly = true
-    displayName = (intl: IntlShape) => intl.formatMessage({id: 'PropertyType.CreatedBy', defaultMessage: 'Created by'})
+    displayName = (intl: IntlShape) => intl.formatMessage({id: 'PropertyType.CreatedBy', defaultMessage: 'Oluşturan'})
     canFilter = true
     filterValueType = 'person' as FilterValueType
     canGroup = true

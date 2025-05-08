@@ -97,7 +97,7 @@ const Gallery = (props: Props): JSX.Element => {
                     >
                         <FormattedMessage
                             id='TableComponent.plus-new'
-                            defaultMessage='+ New'
+                            defaultMessage='+ Yeni'
                         />
                     </div>
                 </BoardPermissionGate>

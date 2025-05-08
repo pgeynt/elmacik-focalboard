@@ -1,18 +1,63 @@
 .SidebarSettingsMenu {
+    margin-top: 8px;
+    padding: 0 16px;
+    
     .menu-entry {
-        display: flex;
+        font-size: 14px;
+        font-weight: 500;
         cursor: pointer;
-        flex-direction: row;
-        padding: 0 16px 0 8px;
-        height: 36px;
-        align-items: center;
-        padding-left: 20px;
         color: rgba(var(--sidebar-text-rgb), 0.64);
-        font-weight: 400;
-
+        height: 36px;
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+        
         &:hover {
-            background-color: rgba(var(--sidebar-text-rgb), 0.08);
-            display: flex;
+            color: rgba(var(--sidebar-text-rgb), 0.9);
+            background-color: rgba(var(--sidebar-text-rgb), 0.04);
+        }
+    }
+    
+    .MenuWrapper {
+        border-radius: 6px;
+        
+        &:hover {
+            background-color: rgba(var(--sidebar-text-rgb), 0.04);
+        }
+    }
+    
+    .Menu {
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+        
+        .MenuOption {
+            transition: background-color 0.2s ease;
+            
+            &:hover {
+                background-color: rgba(var(--sidebar-text-rgb), 0.06);
+            }
+        }
+        
+        /* Alt menü için stil düzenlemeleri */
+        .SubMenu {
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+            
+            .MenuOption {
+                transition: background-color 0.2s ease;
+                
+                &:hover {
+                    background-color: rgba(var(--sidebar-text-rgb), 0.06);
+                }
+            }
+        }
+        
+        .SubMenuOption {
+            &.menu-option-active {
+                background-color: rgba(var(--sidebar-text-rgb), 0.06);
+            }
         }
     }
 }

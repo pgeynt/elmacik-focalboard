@@ -114,12 +114,12 @@ const FilterEntry = (props: Props): JSX.Element => {
                         <>
                             <Menu.Text
                                 id='includes'
-                                name={intl.formatMessage({id: 'Filter.includes', defaultMessage: 'includes'})}
+                                name={intl.formatMessage({id: 'Filter.includes', defaultMessage: 'içerir'})}
                                 onClick={(id) => props.conditionClicked(id, filter)}
                             />
                             <Menu.Text
                                 id='notIncludes'
-                                name={intl.formatMessage({id: 'Filter.not-includes', defaultMessage: 'doesn\'t include'})}
+                                name={intl.formatMessage({id: 'Filter.not-includes', defaultMessage: 'içermez'})}
                                 onClick={(id) => props.conditionClicked(id, filter)}
                             />
                         </>}
@@ -127,12 +127,12 @@ const FilterEntry = (props: Props): JSX.Element => {
                         <>
                             <Menu.Text
                                 id='isEmpty'
-                                name={intl.formatMessage({id: 'Filter.is-empty', defaultMessage: 'is empty'})}
+                                name={intl.formatMessage({id: 'Filter.is-empty', defaultMessage: 'boş'})}
                                 onClick={(id) => props.conditionClicked(id, filter)}
                             />
                             <Menu.Text
                                 id='isNotEmpty'
-                                name={intl.formatMessage({id: 'Filter.is-not-empty', defaultMessage: 'is not empty'})}
+                                name={intl.formatMessage({id: 'Filter.is-not-empty', defaultMessage: 'boş değil'})}
                                 onClick={(id) => props.conditionClicked(id, filter)}
                             />
                         </>}

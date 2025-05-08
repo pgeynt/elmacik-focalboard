@@ -51,8 +51,8 @@ const GalleryCard = (props: Props) => {
 
     const confirmDialogProps: ConfirmationDialogBoxProps = useMemo(() => {
         return {
-            heading: intl.formatMessage({id: 'CardDialog.delete-confirmation-dialog-heading', defaultMessage: 'Confirm card delete!'}),
-            confirmButtonText: intl.formatMessage({id: 'CardDialog.delete-confirmation-dialog-button-text', defaultMessage: 'Delete'}),
+            heading: intl.formatMessage({id: 'CardDialog.delete-confirmation-dialog-heading', defaultMessage: 'Kart silmeyi onayla!'}),
+            confirmButtonText: intl.formatMessage({id: 'CardDialog.delete-confirmation-dialog-button-text', defaultMessage: 'Sil'}),
             onConfirm: handleDeleteCard,
             onClose: () => {
                 setShowConfirmationDialogBox(false)
@@ -142,7 +142,7 @@ const GalleryCard = (props: Props) => {
                             {card.title ||
                                 <FormattedMessage
                                     id='KanbanCard.untitled'
-                                    defaultMessage='Untitled'
+                                    defaultMessage='Başlıksız'
                                 />}
                         </div>
                     </div>}

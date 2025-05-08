@@ -33,13 +33,13 @@ const RegistrationLink = (props: Props) => {
 
     const regenerateToken = async () => {
         // eslint-disable-next-line no-alert
-        const accept = window.confirm(intl.formatMessage({id: 'RegistrationLink.confirmRegenerateToken', defaultMessage: 'This will invalidate previously shared links. Continue?'}))
+        const accept = window.confirm(intl.formatMessage({id: 'RegistrationLink.confirmRegenerateToken', defaultMessage: 'Bu, daha önce paylaşılan bağlantıları geçersiz kılacaktır. Devam etmek istiyor musunuz?'}))
         if (accept) {
             await dispatch(regenerateSignupToken())
             await dispatch(refreshCurrentTeam())
             setWasCopied(false)
 
-            const description = intl.formatMessage({id: 'RegistrationLink.tokenRegenerated', defaultMessage: 'Registration link regenerated'})
+            const description = intl.formatMessage({id: 'RegistrationLink.tokenRegenerated', defaultMessage: 'Kayıt bağlantısı yeniden oluşturuldu'})
             sendFlashMessage({content: description, severity: 'low'})
         }
     }
@@ -54,7 +54,7 @@ const RegistrationLink = (props: Props) => {
             <div className='RegistrationLink'>
                 {signupToken && <>
                     <div className='row'>
-                        {intl.formatMessage({id: 'RegistrationLink.description', defaultMessage: 'Share this link for others to create accounts:'})}
+                        {intl.formatMessage({id: 'RegistrationLink.description', defaultMessage: 'Başkalarının hesap oluşturması için bu bağlantıyı paylaşın:'})}
                     </div>
                     <div className='row'>
                         <a
@@ -73,7 +73,7 @@ const RegistrationLink = (props: Props) => {
                                 setWasCopied(true)
                             }}
                         >
-                            {wasCopied ? intl.formatMessage({id: 'RegistrationLink.copiedLink', defaultMessage: 'Copied!'}) : intl.formatMessage({id: 'RegistrationLink.copyLink', defaultMessage: 'Copy link'})}
+                            {wasCopied ? intl.formatMessage({id: 'RegistrationLink.copiedLink', defaultMessage: 'Kopyalandı!'}) : intl.formatMessage({id: 'RegistrationLink.copyLink', defaultMessage: 'Bağlantıyı kopyala'})}
                         </Button>
                     </div>
                     <div className='row'>
@@ -82,7 +82,7 @@ const RegistrationLink = (props: Props) => {
                             emphasis='secondary'
                             size='small'
                         >
-                            {intl.formatMessage({id: 'RegistrationLink.regenerateToken', defaultMessage: 'Regenerate token'})}
+                            {intl.formatMessage({id: 'RegistrationLink.regenerateToken', defaultMessage: 'Jetonu yeniden oluştur'})}
                         </Button>
                     </div>
                 </>}

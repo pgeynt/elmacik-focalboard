@@ -33,7 +33,7 @@ async function addTextBlock(card: Card, intl: IntlShape, text: string): Promise<
     block.boardId = card.boardId
     block.title = text
 
-    const description = intl.formatMessage({id: 'CardDetail.addCardText', defaultMessage: 'add card text'})
+    const description = intl.formatMessage({id: 'CardDetail.addCardText', defaultMessage: 'kart metni ekle'})
 
     const afterRedo = async (newBlock: Block) => {
         const contentOrder = card.fields.contentOrder.slice()
@@ -77,7 +77,7 @@ function moveBlock(card: Card, srcBlock: IContentBlockWithCords, dstBlock: ICont
     const newContentOrder = dragAndDropRearrange({contentOrder, srcBlockId, srcBlockX, srcBlockY, dstBlockId, dstBlockX, dstBlockY, moveTo})
 
     mutator.performAsUndoGroup(async () => {
-        const description = intl.formatMessage({id: 'CardDetail.moveContent', defaultMessage: 'Move card content'})
+        const description = intl.formatMessage({id: 'CardDetail.moveContent', defaultMessage: 'Kart içeriğini taşı'})
         await mutator.changeCardContentOrder(card.boardId, card.id, card.fields.contentOrder, newContentOrder, description)
     })
 }
@@ -190,7 +190,7 @@ const CardDetailContents = (props: Props) => {
                     <MarkdownEditor
                         id={id}
                         text=''
-                        placeholderText='Add a description...'
+                        placeholderText='Açıklama ekle...'
                         onBlur={(text) => {
                             if (text) {
                                 addTextBlock(card, intl, text)

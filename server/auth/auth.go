@@ -14,6 +14,7 @@ type AuthInterface interface {
 	GetSession(token string) (*model.Session, error)
 	IsValidReadToken(boardID string, readToken string) (bool, error)
 	DoesUserHaveTeamAccess(userID string, teamID string) bool
+	GetUserID() string
 }
 
 // Auth authenticates sessions.
@@ -21,6 +22,7 @@ type Auth struct {
 	config      *config.Configuration
 	store       store.Store
 	permissions permissions.PermissionsService
+	userID      string
 }
 
 // New returns a new Auth.
@@ -41,6 +43,7 @@ func (a *Auth) GetSession(token string) (*model.Session, error) {
 	if session.UpdateAt < (utils.GetMillis() - utils.SecondsToMillis(a.config.SessionRefreshTime)) {
 		_ = a.store.RefreshSession(session)
 	}
+	a.userID = session.UserID
 	return session, nil
 }
 
@@ -67,4 +70,9 @@ func (a *Auth) IsValidReadToken(boardID string, readToken string) (bool, error) 
 
 func (a *Auth) DoesUserHaveTeamAccess(userID string, teamID string) bool {
 	return a.permissions.HasPermissionToTeam(userID, teamID, model.PermissionViewTeam)
+}
+
+// GetUserID returns the user ID from the current session.
+func (a *Auth) GetUserID() string {
+	return a.userID
 }

@@ -10,7 +10,7 @@ export default class PhoneProperty extends PropertyType {
     Editor = Phone
     name = 'Phone'
     type = 'phone' as PropertyTypeEnum
-    displayName = (intl: IntlShape) => intl.formatMessage({id: 'PropertyType.Phone', defaultMessage: 'Phone'})
+    displayName = (intl: IntlShape) => intl.formatMessage({id: 'PropertyType.Phone', defaultMessage: 'Telefon'})
     canFilter = true
     filterValueType = 'text' as FilterValueType
 }
