@@ -12,8 +12,47 @@ import (
 	"github.com/mattermost/mattermost/server/public/shared/mlog"
 )
 
-// CreateNotification yeni bir bildirim oluşturur
-func (a *App) CreateNotification(userID, message, from string, boardID, cardID string) (*model.Notification, error) {
+// CreateNotificationFromModel bildirim nesnesinden yeni bir bildirim oluşturur
+func (a *App) CreateNotification(notification *model.Notification) (*model.Notification, error) {
+	if notification.UserID == "" {
+		return nil, fmt.Errorf("userID is required")
+	}
+	if notification.Message == "" {
+		return nil, fmt.Errorf("message is required")
+	}
+	if notification.From == "" {
+		return nil, fmt.Errorf("from is required")
+	}
+
+	// ID verilmediyse otomatik oluştur
+	if notification.ID == "" {
+		notification.ID = utils.NewID(utils.IDTypeBlock)
+	}
+
+	// CreateAt belirtilmediyse şu anı kullan
+	if notification.CreateAt <= 0 {
+		notification.CreateAt = utils.GetMillis()
+	}
+
+	// BoardID varsa ve Link belirtilmediyse otomatik oluştur
+	if notification.BoardID != "" && notification.Link == "" {
+		board, err := a.GetBoard(notification.BoardID)
+		if err != nil {
+			return nil, err
+		}
+		if board != nil {
+			notification.Link = fmt.Sprintf("/boards/%s", notification.BoardID)
+			if notification.CardID != "" {
+				notification.Link = fmt.Sprintf("%s/%s", notification.Link, notification.CardID)
+			}
+		}
+	}
+
+	return a.store.SaveNotification(notification)
+}
+
+// CreateNotificationWithParams parametrelerden yeni bir bildirim oluşturur
+func (a *App) CreateNotificationWithParams(userID, message, from string, boardID, cardID string) (*model.Notification, error) {
 	if userID == "" {
 		return nil, fmt.Errorf("userID is required")
 	}
@@ -141,7 +180,7 @@ func (a *App) CreateBoardMembershipNotification(addedBy *model.User, userID stri
 	message := fmt.Sprintf("%s sizi \"%s\" panosuna ekledi", addedBy.Username, board.Title)
 	from := addedBy.Username
 
-	_, err = a.CreateNotification(userID, message, from, boardID, "")
+	_, err = a.CreateNotificationWithParams(userID, message, from, boardID, "")
 	return err
 }
 
@@ -159,7 +198,7 @@ func (a *App) CreateCardAssignmentNotification(assignedBy *model.User, userID st
 	message := fmt.Sprintf("%s sizi \"%s\" kartına atadı", assignedBy.Username, cardTitle)
 	from := assignedBy.Username
 
-	_, err := a.CreateNotification(userID, message, from, boardID, cardID)
+	_, err := a.CreateNotificationWithParams(userID, message, from, boardID, cardID)
 	return err
 }
 
@@ -177,7 +216,7 @@ func (a *App) CreateCardCommentNotification(commentedBy *model.User, userID stri
 	message := fmt.Sprintf("%s, \"%s\" kartına yorum yaptı", commentedBy.Username, cardTitle)
 	from := commentedBy.Username
 
-	_, err := a.CreateNotification(userID, message, from, boardID, cardID)
+	_, err := a.CreateNotificationWithParams(userID, message, from, boardID, cardID)
 	return err
 }
 

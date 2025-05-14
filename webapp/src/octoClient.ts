@@ -32,6 +32,16 @@ export interface Notification {
     cardID?: string
 }
 
+// Bildirim oluşturmak için gönderilecek veriler
+export interface NotificationToSend {
+    message: string
+    from: string
+    link?: string
+    boardID?: string
+    cardID?: string
+    read?: boolean
+}
+
 //
 // OctoClient is the client interface to the server APIs
 //
@@ -1178,6 +1188,41 @@ class OctoClient {
         }
         
         return {success: true}
+    }
+
+    // POST /api/v2/notifications - Yeni bildirim oluştur
+    async createNotification(notification: NotificationToSend): Promise<{success: boolean, data?: Notification, error?: string}> {
+        const response = await fetch(this.getBaseURL() + '/api/v2/notifications', {
+            method: 'POST',
+            headers: this.headers(),
+            body: JSON.stringify(notification),
+        })
+        
+        if (response.status !== 200 && response.status !== 201) {
+            const errorJson = await this.getJson(response, {error: 'Unknown error'})
+            return {success: false, error: errorJson.error}
+        }
+        
+        const data = await this.getJson<Notification>(response, null as unknown as Notification)
+        return {success: true, data}
+    }
+
+    // Belirtilen boardId ve blockId ile bir blok alır
+    async getBlock(boardId: string, blockId: string): Promise<Block | undefined> {
+        const path = `/api/v2/boards/${boardId}/blocks/${blockId}`
+        const response = await fetch(this.getBaseURL() + path, {
+            method: 'GET',
+            headers: this.headers(),
+        })
+        if (response.status !== 200) {
+            return undefined
+        }
+        
+        const blocks = await this.getJson(response, []) as Block[]
+        if (blocks.length === 0) {
+            return undefined
+        }
+        return this.fixBlocks(blocks)[0]
     }
 }
 

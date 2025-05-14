@@ -22,13 +22,44 @@ const ViewHeaderPropertiesMenu = (props: Props) => {
     const canShowBadges = viewType === 'board' || viewType === 'gallery' || viewType === 'calendar'
 
     const toggleVisibility = (propertyId: string) => {
-        let newVisiblePropertyIds = []
+        let newVisiblePropertyIds: string[] = []
         if (visiblePropertyIds.includes(propertyId)) {
             newVisiblePropertyIds = visiblePropertyIds.filter((o: string) => o !== propertyId)
         } else {
             newVisiblePropertyIds = [...visiblePropertyIds, propertyId]
         }
         mutator.changeViewVisibleProperties(activeView.boardId, activeView.id, visiblePropertyIds, newVisiblePropertyIds)
+    }
+
+    const toggleAllProperties = (showAll: boolean) => {
+        let newVisiblePropertyIds: string[] = []
+        if (showAll) {
+            // Tüm özellikleri görünür yap
+            newVisiblePropertyIds = [...properties.map((o) => o.id)]
+            if (activeView.fields.viewType === 'gallery') {
+                newVisiblePropertyIds.push(Constants.titleColumnId)
+            }
+            if (canShowBadges) {
+                newVisiblePropertyIds.push(Constants.badgesColumnId)
+            }
+        } else {
+            // Tüm özellikleri gizle
+            newVisiblePropertyIds = []
+        }
+        mutator.changeViewVisibleProperties(activeView.boardId, activeView.id, visiblePropertyIds, newVisiblePropertyIds)
+    }
+
+    // Tüm özelliklerin görünür olup olmadığını kontrol et
+    const allPropertiesVisible = () => {
+        const allPossibleProperties = [...properties.map((o) => o.id)]
+        if (activeView.fields.viewType === 'gallery') {
+            allPossibleProperties.push(Constants.titleColumnId)
+        }
+        if (canShowBadges) {
+            allPossibleProperties.push(Constants.badgesColumnId)
+        }
+        
+        return allPossibleProperties.every((id) => visiblePropertyIds.includes(id))
     }
 
     return (
@@ -40,6 +71,15 @@ const ViewHeaderPropertiesMenu = (props: Props) => {
                 />
             </Button>
             <Menu>
+                <Menu.Switch
+                    key='toggle-all'
+                    id='toggle-all'
+                    name={intl.formatMessage({id: 'ViewHeader.properties-toggle-all', defaultMessage: 'Tümünü aç/kapat'})}
+                    isOn={allPropertiesVisible()}
+                    suppressItemClicked={true}
+                    onClick={() => toggleAllProperties(!allPropertiesVisible())}
+                />
+                <Menu.Separator/>
                 {activeView.fields.viewType === 'gallery' &&
                     <Menu.Switch
                         key={Constants.titleColumnId}

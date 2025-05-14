@@ -8,6 +8,8 @@ import {useHistory} from 'react-router-dom'
 import './notificationMenu.scss'
 import {useAppSelector, useAppDispatch} from '../../store/hooks'
 import {markAllAsRead, markAsRead} from '../../store/notifications'
+import octoClient from '../../octoClient'
+import {Utils} from '../../utils'
 
 const NotificationMenu = () => {
     const intl = useIntl()
@@ -16,15 +18,32 @@ const NotificationMenu = () => {
     
     const {notifications} = useAppSelector((state) => state.notifications)
     
-    const handleNotificationClick = useCallback((id: string, link?: string) => {
+    const handleNotificationClick = useCallback(async (id: string, link?: string) => {
+        // Redux store'da bildirimi okundu olarak işaretle
         dispatch(markAsRead(id))
+        
+        // Sunucuya bildir
+        try {
+            await octoClient.markNotificationAsRead(id)
+        } catch (err) {
+            Utils.logError(`Bildirim okundu olarak işaretlenirken hata: ${err}`)
+        }
+        
         if (link) {
             history.push(link)
         }
     }, [dispatch, history])
     
-    const handleMarkAllAsRead = useCallback(() => {
+    const handleMarkAllAsRead = useCallback(async () => {
+        // Redux store'da tüm bildirimleri okundu olarak işaretle
         dispatch(markAllAsRead())
+        
+        // Sunucuya bildir
+        try {
+            await octoClient.markAllNotificationsAsRead()
+        } catch (err) {
+            Utils.logError(`Tüm bildirimler okundu olarak işaretlenirken hata: ${err}`)
+        }
     }, [dispatch])
     
     if (notifications.length === 0) {

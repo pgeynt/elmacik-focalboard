@@ -72,7 +72,23 @@ export default function KanbanColumnHeader(props: Props): JSX.Element {
 
     useEffect(() => {
         setGroupTitle(group.option.value)
-    }, [group.option.value])
+        
+        // Boş durum sütunu için özel işlem
+        if (!group.option.id && groupByProperty) {
+            const storageKey = `kanban_empty_column_name_${board.id}_${groupByProperty.id}`
+            const savedTitle = localStorage.getItem(storageKey)
+            
+            if (savedTitle) {
+                setGroupTitle(savedTitle)
+            } else {
+                // Varsayılan değer
+                setGroupTitle(intl.formatMessage({
+                    id: 'BoardComponent.no-property',
+                    defaultMessage: '{property} yok',
+                }, {property: groupByProperty.name}))
+            }
+        }
+    }, [group.option.value, group.option.id, board.id, groupByProperty, intl])
 
     if (canEditBoardProperties) {
         drop(drag(headerRef))
@@ -98,15 +114,38 @@ export default function KanbanColumnHeader(props: Props): JSX.Element {
                 <Label
                     title={intl.formatMessage({
                         id: 'BoardComponent.no-property-title',
-                        defaultMessage: '{property} özelliği boş olan öğeler buraya gelecek. Bu sütun kaldırılamaz.',
+                        defaultMessage: '{property} özelliği boş olan öğeler buraya gelecek.',
                     }, {property: groupByProperty!.name})}
+                    color='propColorDefault'
                 >
-                    <FormattedMessage
-                        id='BoardComponent.no-property'
-                        defaultMessage='{property} yok'
-                        values={{
-                            property: groupByProperty!.name,
+                    <Editable
+                        value={groupTitle}
+                        placeholderText='Durum Yok'
+                        onChange={setGroupTitle}
+                        onSave={() => {
+                            if (groupTitle.trim() === '') {
+                                setGroupTitle(intl.formatMessage({
+                                    id: 'BoardComponent.no-property',
+                                    defaultMessage: '{property} yok',
+                                }, {property: groupByProperty!.name}))
+                            }
+                            
+                            if (groupByProperty) {
+                                const storageKey = `kanban_empty_column_name_${board.id}_${groupByProperty.id}`
+                                
+                                if (groupTitle.trim() !== '') {
+                                    localStorage.setItem(storageKey, groupTitle)
+                                }
+                            }
                         }}
+                        onCancel={() => {
+                            setGroupTitle(intl.formatMessage({
+                                id: 'BoardComponent.no-property',
+                                defaultMessage: '{property} yok',
+                            }, {property: groupByProperty!.name}))
+                        }}
+                        readonly={props.readonly || !canEditBoardProperties}
+                        spellCheck={true}
                     />
                 </Label>}
             {groupByProperty?.type === 'person' &&
@@ -170,14 +209,20 @@ export default function KanbanColumnHeader(props: Props): JSX.Element {
                                     name={intl.formatMessage({id: 'BoardComponent.hide', defaultMessage: 'Gizle'})}
                                     onClick={() => mutator.hideViewColumn(board.id, activeView, group.option.id || '')}
                                 />
+                                <Menu.Text
+                                    id='delete'
+                                    icon={<DeleteIcon/>}
+                                    name={intl.formatMessage({id: 'BoardComponent.delete', defaultMessage: 'Sil'})}
+                                    onClick={() => {
+                                        if (canEditOption) {
+                                            mutator.deletePropertyOption(board.id, board.cardProperties, groupByProperty!, group.option)
+                                        } else if (groupByProperty) {
+                                            mutator.hideViewColumn(board.id, activeView, group.option.id || '')
+                                        }
+                                    }}
+                                />
                                 {canEditOption &&
                                     <>
-                                        <Menu.Text
-                                            id='delete'
-                                            icon={<DeleteIcon/>}
-                                            name={intl.formatMessage({id: 'BoardComponent.delete', defaultMessage: 'Sil'})}
-                                            onClick={() => mutator.deletePropertyOption(board.id, board.cardProperties, groupByProperty!, group.option)}
-                                        />
                                         <Menu.Separator/>
                                         {Object.entries(Constants.menuColors).map(([key, color]) => (
                                             <Menu.Color
