@@ -1,0 +1,11 @@
+caproverOneClickApp:
+  captainVersion: 4
+  documentation: Focalboard CapRover kurulumu
+
+services:
+  - serviceName: focalboard
+    dockerfilePath: ./docker/Dockerfile
+    containerHttpPort: 8000
+    volumes:
+      - containerPath: /opt/focalboard/data
+        volumeName: elmacik-focalboard-data
