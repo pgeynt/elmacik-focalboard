@@ -1,11 +1,26 @@
 caproverOneClickApp:
   captainVersion: 4
-  documentation: Focalboard CapRover kurulumu
+  documentation: Focalboard + PostgreSQL tek adımda deploy
 
 services:
+  # ─── Postgres servisi ───────────────────────────────────────────────────────────
+  - serviceName: elmacik-db
+    image: postgres:latest
+    containerHttpPort: 5432
+    envVars:
+      POSTGRES_USER:     "focalboard"
+      POSTGRES_PASSWORD: "K@@bExk^jyJ8"
+      POSTGRES_DB:       "focalboard"
+    volumes:
+      - containerPath: /var/lib/postgresql/data
+        volumeName:   elmacik-db-data
+
+  # ─── Focalboard servisi ────────────────────────────────────────────────────────
   - serviceName: focalboard
-    dockerfilePath: ./docker/Dockerfile
+    dockerfilePath:    ./docker/Dockerfile
     containerHttpPort: 8000
     volumes:
       - containerPath: /opt/focalboard/data
-        volumeName: elmacik-focalboard-data
+        volumeName:   elmacik-focalboard-data
+      - containerPath: /opt/focalboard/config.json
+        volumeName:   elmacik-focalboard-config
