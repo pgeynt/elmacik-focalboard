@@ -1,17 +1,17 @@
 {
-    "serverRoot": "http://localhost:8000",
-    "port": 8000,
-    "dbtype": "postgres",
-    "dbconfig": "postgres://focalboard:K@@bExk^jyJ8@srv-captain--elmacik-db:5432/focalboard?sslmode=disable&connect_timeout=10",
-    "useSSL": false,
-    "webpath": "./pack",
-    "filespath": "./data/files",
-    "telemetry": true,
-    "prometheusaddress": ":9092",
-    "session_expire_time": 2592000,
-    "session_refresh_time": 18000,
-    "localOnly": false,
-    "enableLocalMode": true,
-    "localModeSocketLocation": "/var/tmp/focalboard_local.socket"
-  }
-  
+  "serverRoot": "http://localhost:8000",
+  "port": 8000,
+  "dbtype": "postgres",
+  "dbconfig": "postgres://focalboard:K%40%40bExk^jyJ8@srv-captain--elmacik-db:5432/focalboard?sslmode=disable&connect_timeout=10",
+  "useSSL": false,
+  "webpath": "./pack",
+  "filespath": "./data/files",
+  "telemetry": true,
+  "prometheus_address": ":9092",
+  "session_expire_time": 2592000,
+  "session_refresh_time": 18000,
+  "localOnly": false,
+  "enableLocalMode": true,
+  "localModeSocketLocation": "/var/tmp/focalboard_local.socket",
+  "enablePublicSharedBoards": false
+}
