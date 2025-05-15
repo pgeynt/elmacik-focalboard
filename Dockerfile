@@ -25,6 +25,7 @@ RUN EXCLUDE_PLUGIN=true \
     make server-docker os=${TARGETOS} arch=${TARGETARCH}
 
 # ─── Final runtime image ────────────────────────────────────────────────────────
+# Önceki buster-slim -> bookworm-slim olarak güncelledik
 FROM debian:bookworm-slim
 
 # Prepare directories & permissions
@@ -45,4 +46,4 @@ EXPOSE 8000/tcp 9092/tcp
 
 VOLUME ["/opt/focalboard/data"]
 
-CMD ["bin/focalboard-server"] 
+CMD ["bin/focalboard-server"]
